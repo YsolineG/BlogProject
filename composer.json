@@ -1,0 +1,12 @@
+{
+    "name": "ysoline/blog-project",
+    "description": "A php blog",
+    "type": "project",
+    "authors": [
+        {
+            "name": "YsolineG",
+            "email": "ysoline.ganster@gmail.com"
+        }
+    ],
+    "require": {}
+}
