@@ -1,6 +1,7 @@
 <?php
 
 require 'Database.php';
+require 'BlogPost.php';
 
 ?>
 
@@ -15,9 +16,20 @@ require 'Database.php';
 <body>
 
     <?php
-    $db = new Database();
-
-    echo $db->getConnection();
+    $blogPost = new BlogPost();
+    $blogPosts = $blogPost->getBlogPosts();
+    while($blogPost = $blogPosts->fetch())
+    {
+    ?>
+    <div>
+         <h2><?= htmlspecialchars($blogPost['title']);?></h2>
+            <p><?= htmlspecialchars($blogPost['content']);?></p>
+            <p>Créé le : <?= htmlspecialchars($blogPost['created_at']);?></p>
+            <p>Modifié le : <?= htmlspecialchars($blogPost['updated_at']);?></p>
+    </div>
+    <?php
+    }
+    $blogPosts->closeCursor();
     ?>
 
 </body>
