@@ -21,10 +21,10 @@ require 'BlogPost.php';
     ?>
 
     <div>
-         <h2><?= htmlspecialchars($blogPost['title']);?></h2>
-            <p><?= htmlspecialchars($blogPost['content']);?></p>
-            <p>Créé le : <?= htmlspecialchars($blogPost['created_at']);?></p>
-            <p>Modifié le : <?= htmlspecialchars($blogPost['updated_at']);?></p>
+         <h2><?= htmlspecialchars($blogPost->title)?></h2>
+            <p><?= htmlspecialchars($blogPost->content)?></p>
+            <p>Créé le : <?= htmlspecialchars($blogPost->created_at)?></p>
+            <p>Modifié le : <?= htmlspecialchars($blogPost->updated_at)?></p>
     </div>
 
     <?php
