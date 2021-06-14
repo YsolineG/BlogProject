@@ -15,22 +15,25 @@ require 'BlogPost.php';
 </head>
 <body>
 
-    <?php
-    $blogPost = new BlogPost();
-    $blogPosts = $blogPost->getBlogPosts();
-    while($blogPost = $blogPosts->fetch())
-    {
+<?php
+$blogPost = new BlogPost();
+$blogPosts = $blogPost->getBlogPosts();
+while ($blogPost = $blogPosts->fetch()) {
     ?>
     <div>
-         <h2><?= htmlspecialchars($blogPost['title']);?></h2>
-            <p><?= htmlspecialchars($blogPost['content']);?></p>
-            <p>Créé le : <?= htmlspecialchars($blogPost['created_at']);?></p>
-            <p>Modifié le : <?= htmlspecialchars($blogPost['updated_at']);?></p>
+        <h2>
+            <a href="GetBlogPost.php?id=<?= htmlspecialchars($blogPost['blog_post_id']); ?>">
+                <?= htmlspecialchars($blogPost['title']); ?>
+            </a>
+        </h2>
+        <p><?= htmlspecialchars($blogPost['content']); ?></p>
+        <p>Créé le : <?= htmlspecialchars($blogPost['created_at']); ?></p>
+        <p>Modifié le : <?= htmlspecialchars($blogPost['updated_at']); ?></p>
     </div>
     <?php
-    }
-    $blogPosts->closeCursor();
-    ?>
+}
+$blogPosts->closeCursor();
+?>
 
 </body>
 </html>

@@ -1,20 +1,38 @@
 <?php
 
-class Database
+abstract class Database
 {
     const DB_HOST = 'mysql:host=localhost;dbname=blog_project';
     const DB_USER = 'root';
 
-    public function getConnection()
+    private $connection;
+
+    private function checkConnection()
     {
-        try {
-            $connection = new PDO(self::DB_HOST, self::DB_USER);
-            $connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            return $connection;
-        } 
-        catch (Exception $errorConnection)
-        {
-            die ('Erreur de connexion:'.$errorConnection->getMessage());
-        }
-    }
+         if($this->connection === null) {
+             return $this->getConnection();
+         }
+         return $this->connection;
+     }
+
+     private function getConnection()
+     {
+         try {
+             $this->connection = new PDO(self::DB_HOST, self::DB_USER);
+             $this->connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+             return $this->connection;
+         } catch (Exception $errorConnection) {
+             die ('Erreur de connexion:' . $errorConnection->getMessage());
+         }
+     }
+
+     protected function createQuery($sql, $parameters = null)
+     {
+         if ($parameters) {
+             $result = $this->checkConnection()->prepare($sql);
+             $result->execute($parameters);
+             return $result;
+         }
+         return $this->checkConnection()->query($sql);
+     }
 }
