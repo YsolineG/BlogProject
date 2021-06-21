@@ -1,8 +1,11 @@
 <?php
 
-require 'Database.php';
-require 'BlogPost.php';
-require 'Comment.php';
+require '../src/DAO/Database.php';
+require '../src/DAO/BlogPost.php';
+require '../src/DAO/Comment.php';
+
+use BlogProject\src\DAO\BlogPost;
+use BlogProject\src\DAO\Comment;
 
 ?>
 

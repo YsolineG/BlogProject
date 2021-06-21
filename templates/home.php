@@ -1,7 +1,9 @@
 <?php
 
-require 'Database.php';
-require 'BlogPost.php';
+require '../src/DAO/Database.php';
+require '../src/DAO/BlogPost.php';
+
+use BlogProject\src\DAO\BlogPost;
 
 ?>
 

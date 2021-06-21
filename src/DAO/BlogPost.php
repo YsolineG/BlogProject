@@ -1,5 +1,7 @@
 <?php
 
+namespace BlogProject\src\DAO;
+
 class BlogPost extends Database
 {
     public function getBlogPosts()

@@ -1,5 +1,7 @@
 <?php
 
+namespace BlogProject\src\DAO;
+
 class Comment extends Database
 {
     public function getComments($idPost)

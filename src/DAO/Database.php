@@ -1,5 +1,10 @@
 <?php
 
+namespace BlogProject\src\DAO;
+
+use PDO;
+use Exception;
+
 abstract class Database
 {
     const DB_HOST = 'mysql:host=localhost;dbname=blog_project';
