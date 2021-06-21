@@ -2,6 +2,7 @@
 
 require 'Database.php';
 require 'BlogPost.php';
+require 'Comment.php';
 
 ?>
 
@@ -32,5 +33,20 @@ require 'BlogPost.php';
     ?>
 
     <a href='home.php'>Retour à l'accueil</a>
+    <div>
+        <h3>Commentaires</h3>
+        <?php
+        $comment = new Comment();
+        $comments = $comment->getComments($_GET["id"]);
+        while($comment = $comments->fetch())
+        {
+            ?>
+            <p><?= htmlspecialchars($comment->content)?></p>
+            <p>Posté le <?= htmlspecialchars($comment->created_at)?></p>
+            <?php
+        }
+        $comments->closeCursor();
+        ?>
+    </div>
 </body>
 </html>
