@@ -1,9 +1,5 @@
 <?php
 
-require '../src/DAO/Database.php';
-require '../src/DAO/BlogPost.php';
-require '../src/DAO/Comment.php';
-
 use BlogProject\src\DAO\BlogPost;
 use BlogProject\src\DAO\Comment;
 
@@ -35,7 +31,7 @@ use BlogProject\src\DAO\Comment;
     $blogPosts->closeCursor();
     ?>
 
-    <a href='home.php'>Retour à l'accueil</a>
+    <a href="../public/index.php">Retour à l'accueil</a>
     <div>
         <h3>Commentaires</h3>
         <?php

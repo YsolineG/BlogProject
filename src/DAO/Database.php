@@ -7,9 +7,6 @@ use Exception;
 
 abstract class Database
 {
-    const DB_HOST = 'mysql:host=localhost;dbname=blog_project';
-    const DB_USER = 'root';
-
     private $connection;
 
     private function checkConnection()
@@ -23,7 +20,7 @@ abstract class Database
      private function getConnection()
      {
          try {
-             $this->connection = new PDO(self::DB_HOST, self::DB_USER);
+             $this->connection = new PDO(DB_HOST, DB_USER);
              $this->connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
              return $this->connection;
          } catch (Exception $errorConnection) {

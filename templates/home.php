@@ -1,8 +1,5 @@
 <?php
 
-require '../src/DAO/Database.php';
-require '../src/DAO/BlogPost.php';
-
 use BlogProject\src\DAO\BlogPost;
 
 ?>
@@ -24,7 +21,7 @@ while ($blogPost = $blogPosts->fetch()) {
     ?>
     <div>
         <h2>
-            <a href="GetBlogPost.php?id=<?= htmlspecialchars($blogPost->blog_post_id) ?>">
+            <a href="../public/index.php?route=post&id=<?= htmlspecialchars($blogPost->blog_post_id) ?>">
                 <?= htmlspecialchars($blogPost->title) ?>
             </a>
         </h2>
