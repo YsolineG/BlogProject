@@ -2,6 +2,7 @@
 
 namespace BlogProject\src\DAO;
 
+use BlogProject\config\Parameter;
 use BlogProject\src\model\BlogPost;
 
 class BlogPostDAO extends Database
@@ -40,10 +41,9 @@ class BlogPostDAO extends Database
         return $this->buildObject($blogPost);
     }
 
-    public function addBlogPost($blogPost)
+    public function addBlogPost($post)
     {
-        extract($blogPost);
         $sql = 'INSERT INTO blog_post(title, content, created_at) VALUES (?,?,NOW())';
-        $this->createQuery($sql,[$title, $content]);
+        $this->createQuery($sql,[$post->get('title'), $post->get('content')]);
     }
 }
