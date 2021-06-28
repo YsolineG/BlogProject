@@ -39,4 +39,11 @@ class BlogPostDAO extends Database
         $result->closeCursor();
         return $this->buildObject($blogPost);
     }
+
+    public function addBlogPost($blogPost)
+    {
+        extract($blogPost);
+        $sql = 'INSERT INTO blog_post(title, content, created_at) VALUES (?,?,NOW())';
+        $this->createQuery($sql,[$title, $content]);
+    }
 }
