@@ -1,51 +1,22 @@
-<?php
-
-use BlogProject\src\DAO\BlogPost;
-use BlogProject\src\DAO\Comment;
-
-?>
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mon blog</title>
-</head>
-<body>
-    <?php
-    $blogPost = new BlogPost();
-    $blogPosts = $blogPost->getBlogPost($_GET["id"]);
-    $blogPost = $blogPosts->fetch();
-    ?>
-
+<?php $this->title = "Article";?>
+    <h1>Mon blog</h1>
     <div>
-         <h2><?= htmlspecialchars($blogPost->title)?></h2>
-            <p><?= htmlspecialchars($blogPost->content)?></p>
-            <p>Créé le : <?= htmlspecialchars($blogPost->created_at)?></p>
-            <p>Modifié le : <?= htmlspecialchars($blogPost->updated_at)?></p>
+         <h2><?= htmlspecialchars($blogPost->getTitle())?></h2>
+            <p><?= htmlspecialchars($blogPost->getContent())?></p>
+            <p>Créé le : <?= htmlspecialchars($blogPost->getCreatedAt())?></p>
+            <p>Modifié le : <?= htmlspecialchars($blogPost->getUpdatedAt())?></p>
     </div>
-
-    <?php
-    $blogPosts->closeCursor();
-    ?>
 
     <a href="../public/index.php">Retour à l'accueil</a>
     <div>
         <h3>Commentaires</h3>
         <?php
-        $comment = new Comment();
-        $comments = $comment->getComments($_GET["id"]);
-        while($comment = $comments->fetch())
+        foreach ($comments as $comment)
         {
             ?>
-            <p><?= htmlspecialchars($comment->content)?></p>
-            <p>Posté le <?= htmlspecialchars($comment->created_at)?></p>
+            <p><?= htmlspecialchars($comment->getContent())?></p>
+            <p>Posté le <?= htmlspecialchars($comment->getCreatedAt())?></p>
             <?php
         }
-        $comments->closeCursor();
         ?>
     </div>
-</body>
-</html>
