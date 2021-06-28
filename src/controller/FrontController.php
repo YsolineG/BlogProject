@@ -2,23 +2,8 @@
 
 namespace BlogProject\src\controller;
 
-use BlogProject\src\DAO\BlogPostDAO;
-use BlogProject\src\DAO\CommentDAO;
-use BlogProject\src\model\View;
-
-class FrontController
+class FrontController extends Controller
 {
-    private $blogPostDAO;
-    private $commentDAO;
-    private $view;
-
-    public function __construct()
-    {
-        $this->blogPostDAO = new BlogPostDAO();
-        $this->commentDAO = new CommentDAO();
-        $this->view = new View();
-    }
-
     public function home()
     {
         $blogPosts = $this->blogPostDAO->getBlogPosts();
