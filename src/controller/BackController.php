@@ -21,7 +21,8 @@ class BackController extends Controller
         return $this->view->render('addBlogPost');
     }
 
-    public function editBlogPost($post, $idBlogPost){
+    public function editBlogPost($post, $idBlogPost)
+    {
         $blogPost = $this->blogPostDAO->getBlogPost($idBlogPost);
         if($post->get('submit')) {
             $errors = $this->validation->validate($post, 'BlogPost');
@@ -42,5 +43,12 @@ class BackController extends Controller
         return $this->view->render('editBlogPost', [
             'post' => $post
         ]);
+    }
+
+    public function deleteBlogPost($idBlogPost)
+    {
+        $this->blogPostDAO->deleteBlogPost($idBlogPost);
+        $this->session->set('deleteBlogPost', 'L\'article a bien été supprimé');
+        header('Location:../public/index.php');
     }
 }

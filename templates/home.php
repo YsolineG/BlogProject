@@ -1,5 +1,9 @@
+<?php $this->title = 'Accueil'; ?>
+
 <?= $this->session->show('addBlogPost') ?>
 <?= $this->session->show('editBlogPost') ?>
+<?= $this->session->show('deleteBlogPost') ?>
+
 <a href="../public/index.php?route=addBlogPost">Nouvel article</a>
 <?php
 foreach ($blogPosts as $blogPost) {

@@ -33,6 +33,8 @@ class Router
                     $this->backController->addBlogPost($this->request->getPost());
                 } elseif ($route === 'editBlogPost'){
                     $this->backController->editBlogPost($this->request->getPost(), $this->request->getGet()->get('idBlogPost'));
+                } elseif ($route === 'deleteBlogPost'){
+                    $this->backController->deleteBlogPost($this->request->getGet()->get('idBlogPost'));
                 } else {
                     $this->errorController->errorNotFound();
                 }

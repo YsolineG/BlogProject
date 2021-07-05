@@ -8,6 +8,7 @@
     </div>
     <div class="actions">
         <a href="../public/index.php?route=editBlogPost&idBlogPost=<?=$blogPost->getId()?>">Modifier</a>
+        <a href="../public/index.php?route=deleteBlogPost&idBlogPost=<?=$blogPost->getId()?>">Supprimer</a>
     </div>
     <a href="../public/index.php">Retour à l'accueil</a>
     <div>

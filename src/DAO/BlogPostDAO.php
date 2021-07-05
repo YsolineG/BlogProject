@@ -47,12 +47,21 @@ class BlogPostDAO extends Database
         $this->createQuery($sql,[$post->get('title'), $post->get('content')]);
     }
 
-    public function editBlogPost($post, $idBlogPost) {
+    public function editBlogPost($post, $idBlogPost)
+    {
         $sql = 'UPDATE blog_post SET title = :title, content = :content, updated_at = NOW() WHERE blog_post_id=:idBlogPost';
         $this->createQuery($sql, [
             'title' => $post->get('title'),
             'content' => $post->get('content'),
             'idBlogPost' => $idBlogPost
         ]);
+    }
+
+    public function deleteBlogPost($idBlogPost)
+    {
+        $sql = 'DELETE FROM comment WHERE id_blog_post = ?';
+        $this->createQuery($sql, [$idBlogPost]);
+        $sql = 'DELETE FROM blog_post WHERE blog_post_id = ?';
+        $this->createQuery($sql, [$idBlogPost]);
     }
 }
