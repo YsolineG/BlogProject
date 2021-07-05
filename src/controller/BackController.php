@@ -15,4 +15,17 @@ class BackController extends Controller
             'post' => $post
         ]);
     }
+
+    public function editBlogPost($post, $idBlogPost){
+        $blogPost = $this->blogPostDAO->getBlogPost($idBlogPost);
+        if($post->get('submit')) {
+            $this->blogPostDAO->editBlogPost($post, $idBlogPost);
+            $this->session->set('editBlogPost', 'l\'article a bien été modifié');
+            header('Location:../public/index.php');
+        }
+
+        return $this->view->render('editBlogPost', [
+            'blogPost' => $blogPost
+        ]);
+    }
 }

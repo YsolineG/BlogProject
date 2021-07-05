@@ -46,4 +46,13 @@ class BlogPostDAO extends Database
         $sql = 'INSERT INTO blog_post(title, content, created_at) VALUES (?,?,NOW())';
         $this->createQuery($sql,[$post->get('title'), $post->get('content')]);
     }
+
+    public function editBlogPost($post, $idBlogPost) {
+        $sql = 'UPDATE blog_post SET title = :title, content = :content, updated_at = NOW() WHERE blog_post_id=:idBlogPost';
+        $this->createQuery($sql, [
+            'title' => $post->get('title'),
+            'content' => $post->get('content'),
+            'idBlogPost' => $idBlogPost
+        ]);
+    }
 }

@@ -6,7 +6,9 @@
             <p>Créé le : <?= htmlspecialchars($blogPost->getCreatedAt())?></p>
             <p>Modifié le : <?= htmlspecialchars($blogPost->getUpdatedAt())?></p>
     </div>
-
+    <div class="actions">
+        <a href="../public/index.php?route=editBlogPost&idBlogPost=<?=$blogPost->getId()?>">Modifier</a>
+    </div>
     <a href="../public/index.php">Retour à l'accueil</a>
     <div>
         <h3>Commentaires</h3>

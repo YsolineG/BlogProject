@@ -1,4 +1,5 @@
 <?= $this->session->show('addBlogPost') ?>
+<?= $this->session->show('editBlogPost') ?>
 <a href="../public/index.php?route=addBlogPost">Nouvel article</a>
 <?php
 foreach ($blogPosts as $blogPost) {
