@@ -5,7 +5,10 @@
 <?= $this->session->show('deleteBlogPost') ?>
 <?= $this->session->show('addComment') ?>
 <?= $this->session->show('deleteComment') ?>
+<?= $this->session->show('register') ?>
 
+<a href="../public/index.php?route=register">Inscription</a>
+<a href="../public/index.php?route=login">Connexion</a>
 <a href="../public/index.php?route=addBlogPost">Nouvel article</a>
 <?php
 foreach ($blogPosts as $blogPost) {

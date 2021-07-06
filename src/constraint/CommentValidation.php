@@ -4,7 +4,7 @@ namespace BlogProject\src\constraint;
 
 use BlogProject\config\Parameter;
 
-class CommentValidation
+class CommentValidation extends Validation
 {
     private $errors = [];
     private $constraint;

@@ -7,6 +7,7 @@ use BlogProject\src\DAO\BlogPostDAO;
 use BlogProject\src\DAO\CommentDAO;
 use BlogProject\src\model\View;
 use BlogProject\src\constraint\Validation;
+use BlogProject\src\DAO\UserDAO;
 
 abstract class Controller
 {
@@ -18,6 +19,7 @@ abstract class Controller
     protected $post;
     protected $session;
     protected $validation;
+    protected $userDAO;
 
     public function __construct()
     {
@@ -29,5 +31,6 @@ abstract class Controller
         $this->post = $this->request->getPost();
         $this->session = $this->request->getSession();
         $this->validation = new Validation();
+        $this->userDAO = new UserDAO();
     }
 }
