@@ -21,6 +21,8 @@
             ?>
             <p><?= htmlspecialchars($comment->getContent())?></p>
             <p>Posté le <?= htmlspecialchars($comment->getCreatedAt())?></p>
+
+            <p><a href="../public/index.php?route=deleteComment&idComment=<?= $comment->getId() ?>">Supprimer le commentaire</a></p>
             <?php
         }
         ?>
