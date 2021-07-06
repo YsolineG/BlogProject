@@ -3,6 +3,7 @@
 <?= $this->session->show('addBlogPost') ?>
 <?= $this->session->show('editBlogPost') ?>
 <?= $this->session->show('deleteBlogPost') ?>
+<?= $this->session->show('addComment') ?>
 
 <a href="../public/index.php?route=addBlogPost">Nouvel article</a>
 <?php

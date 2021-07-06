@@ -29,4 +29,10 @@ class CommentDAO extends Database
         $result->closeCursor();
         return $comments;
     }
+
+    public function addComment($post, $idBlogPost)
+    {
+        $sql = 'INSERT INTO comment (content, created_at, id_blog_post, id_user) VALUES (?, NOW(), ?, 1)';
+        $this->createQuery($sql, [$post->get('content'), $idBlogPost]);
+    }
 }

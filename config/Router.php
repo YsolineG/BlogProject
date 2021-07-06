@@ -35,6 +35,8 @@ class Router
                     $this->backController->editBlogPost($this->request->getPost(), $this->request->getGet()->get('idBlogPost'));
                 } elseif ($route === 'deleteBlogPost'){
                     $this->backController->deleteBlogPost($this->request->getGet()->get('idBlogPost'));
+                } elseif ($route === 'addComment') {
+                    $this->frontController->addComment($this->request->getPost(), $this->request->getGet()->get('idBlogPost'));
                 } else {
                     $this->errorController->errorNotFound();
                 }
@@ -42,6 +44,7 @@ class Router
                 $this->frontController->home();
             }
         } catch (Exception $e) {
+            var_dump($e);
             $this->errorController->errorServer();
         }
     }

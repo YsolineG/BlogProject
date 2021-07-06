@@ -10,6 +10,10 @@ class Validation
             $blogPostValidation = new BlogPostValidation();
             $errors = $blogPostValidation->check($data);
             return $errors;
+        } elseif ($name === 'Comment') {
+            $commentValidation = new CommentValidation();
+            $errors = $commentValidation->check($data);
+            return $errors;
         }
     }
 }
