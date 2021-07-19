@@ -76,18 +76,24 @@ class BackController extends Controller
 
     public function logout()
     {
-        $this->session->stop();
-        $this->session->start();
-        $this->session->set('logout', 'A bientôt');
-        header('Location:../public/index.php');
+        $this->logoutOrDeleteAccount('logout');
     }
 
     public function deleteAccount()
     {
         $this->userDAO->deleteAccount($this->session->get('pseudo'));
+        $this->logoutOrDeleteAccount('deleteAccount');
+    }
+
+    private function logoutOrDeleteAccount($param)
+    {
         $this->session->stop();
         $this->session->start();
-        $this->session->set('deleteAccount', 'Votre compte a bien été supprimé');
-        header('Location:../public/index.php');
+        if($param === 'logout') {
+            $this->session->set($param, 'A bientôt');
+        } else {
+            $this->session->set($param, 'Votre compte a bien été supprimé');
+        }
+        header('Location/../public/index.php');
     }
 }
