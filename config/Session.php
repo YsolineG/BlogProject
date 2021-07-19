@@ -42,4 +42,9 @@ class Session
     {
         session_destroy();
     }
+
+    public function start()
+    {
+        session_start();
+    }
 }
