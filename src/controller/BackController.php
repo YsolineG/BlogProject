@@ -94,14 +94,24 @@ class BackController extends Controller
         } else {
             $this->session->set($param, 'Votre compte a bien été supprimé');
         }
-        header('Location/../public/index.php');
+        header('Location:/../public/index.php');
     }
 
     public function administration()
     {
         $blogPosts = $this->blogPostDAO->getBlogPosts();
+        $users = $this->userDAO->getUsers();
+
         return $this->view->render('administration', [
-            'blogPosts' => $blogPosts
+            'blogPosts' => $blogPosts,
+            'users' => $users
         ]);
+    }
+
+    public function deleteUser($userId)
+    {
+        $this->userDAO->deleteUser($userId);
+        $this->session->set('deleteUser', 'L\'utilisateur a bien été supprimé');
+        header('Location:../public/index.php?route=administration');
     }
 }

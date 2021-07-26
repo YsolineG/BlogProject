@@ -53,6 +53,8 @@ class Router
                     $this->backController->deleteAccount();
                 } elseif ($route === 'administration') {
                     $this->backController->administration();
+                } elseif ($route === 'deleteUser') {
+                    $this->backController->deleteUser($this->request->getGet()->get('userId'));
                 } else {
                     $this->errorController->errorNotFound();
                 }
