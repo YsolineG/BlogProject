@@ -1,8 +1,5 @@
 <?php $this->title = 'Accueil'; ?>
 
-<?= $this->session->show('addBlogPost') ?>
-<?= $this->session->show('editBlogPost') ?>
-<?= $this->session->show('deleteBlogPost') ?>
 <?= $this->session->show('addComment') ?>
 <?= $this->session->show('deleteComment') ?>
 <?= $this->session->show('register') ?>

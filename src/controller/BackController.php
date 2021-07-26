@@ -11,7 +11,7 @@ class BackController extends Controller
             if (!$errors) {
                 $this->blogPostDAO->addBlogPost($post);
                 $this->session->set('addBlogPost', 'Le nouvel article a bien été ajouté');
-                header('Location:../public/index.php');
+                header('Location:../public/index.php?route=administration');
             }
             return $this->view->render('addBlogPost', [
                 'post' => $post,
@@ -29,7 +29,7 @@ class BackController extends Controller
             if (!$errors) {
                 $this->blogPostDAO->editBlogPost($post, $idBlogPost);
                 $this->session->set('editBlogPost', 'l\'article a bien été modifié');
-                header('Location:../public/index.php');
+                header('Location:../public/index.php?route=administration');
             }
             return $this->view->render('editBlogPost', [
                 'post' => $post,
@@ -49,7 +49,7 @@ class BackController extends Controller
     {
         $this->blogPostDAO->deleteBlogPost($idBlogPost);
         $this->session->set('deleteBlogPost', 'L\'article a bien été supprimé');
-        header('Location:../public/index.php');
+        header('Location:../public/index.php?route=administration');
     }
 
     public function deleteComment($idComment)
@@ -99,6 +99,9 @@ class BackController extends Controller
 
     public function administration()
     {
-        return $this->view->render('administration');
+        $blogPosts = $this->blogPostDAO->getBlogPosts();
+        return $this->view->render('administration', [
+            'blogPosts' => $blogPosts
+        ]);
     }
 }
