@@ -1,5 +1,5 @@
 <?php
-$route = isset($post) && $post->get('id') ? 'editBlogPost&idBlogPost='.$post->get('id') : 'addBlogPost';
+$route = isset($post) && $post->get('blog_post_id') ? 'editBlogPost&idBlogPost='.$post->get('blog_post_id') : 'addBlogPost';
 $submit = $route === 'addBlogPost' ? 'Envoyer' : 'Mettre à jour';
 ?>
 
@@ -10,5 +10,5 @@ $submit = $route === 'addBlogPost' ? 'Envoyer' : 'Mettre à jour';
     <label for="content">Contenu</label><br>
     <textarea id="content" name="content"><?= isset($post) ? htmlspecialchars($post->get('content')): '' ?></textarea><br>
     <?= isset($errors['content']) ? $errors['content'] : '' ?>
-    <input type="submit" value="<?= $submit; ?>" id="submit" name="submit">
+    <input type="submit" value="<?= $submit ?>" id="submit" name="submit">
 </form>
