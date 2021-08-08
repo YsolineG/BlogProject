@@ -8,6 +8,7 @@ class Comment
     private $content;
     private $createdAt;
     private $updatedAt;
+    private $idUser;
 
     public function getId()
     {
@@ -47,5 +48,15 @@ class Comment
     public function setUpdatedAt($updatedAt)
     {
         $this->updatedAt = $updatedAt;
+    }
+
+    public function getIdUser()
+    {
+        return $this->idUser;
+    }
+
+    public function setIdUser($idUser)
+    {
+        $this->idUser = $idUser;
     }
 }

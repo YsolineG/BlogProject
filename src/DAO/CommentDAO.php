@@ -14,12 +14,13 @@ class CommentDAO extends Database
         $comment->setContent($row['content']);
         $comment->setCreatedAt($row['created_at']);
         $comment->setUpdatedAt($row['updated_at']);
+        $comment->setIdUser($row['id_user']);
         return $comment;
     }
 
     public function getComments($idBlogPost)
     {
-        $sql = 'SELECT comment_id, id_user, content, created_at, updated_at, comment_state FROM comment WHERE id_blog_post';
+        $sql = 'SELECT comment_id, id_user, content, created_at, updated_at, comment_state FROM comment WHERE id_blog_post = ?';
         $result =  $this->createQuery($sql, [$idBlogPost]);
         $comments = [];
         foreach ($result as $row){
@@ -30,10 +31,10 @@ class CommentDAO extends Database
         return $comments;
     }
 
-    public function addComment($post, $idBlogPost)
+    public function addComment($post, $idBlogPost, $idUser)
     {
-        $sql = 'INSERT INTO comment (content, created_at, id_blog_post, id_user) VALUES (?, NOW(), ?, 1)';
-        $this->createQuery($sql, [$post->get('content'), $idBlogPost]);
+        $sql = 'INSERT INTO comment (content, created_at, id_blog_post, id_user) VALUES (?, NOW(), ?, ?)';
+        $this->createQuery($sql, [$post->get('content'), $idBlogPost, $idUser]);
     }
 
     public function deleteComment($idComment)

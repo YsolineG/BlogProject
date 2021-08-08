@@ -29,7 +29,7 @@ class FrontController extends Controller
         if($post->get('submit')) {
             $errors = $this->validation->validate($post, 'Comment');
             if(!$errors) {
-                $comment = $this->commentDAO->addComment($post, $idBlogPost);
+                $comment = $this->commentDAO->addComment($post, $idBlogPost, $this->session->get('id'));
                 $this->session->set('addComment', 'Le nouveau commentaire a bien été ajouté');
                 header('Location:../public/index.php?route=blogPost&idBlogPost='.$idBlogPost);
             }
