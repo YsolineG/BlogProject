@@ -3,6 +3,12 @@
 <p>En construction</p>
 <div>
     <form method="post" action="../public/index.php?route=register">
+        <label for="name">Nom</label><br>
+        <input type="text" id="name" name="name"><br>
+        <?= isset($errors['name']) ? $errors['name'] : '' ?>
+        <label for="firstName">Prénom</label><br>
+        <input type="text" id="firstName" name="firstname"><br>
+        <?= isset($errors['firstname']) ? $errors['firstname'] : '' ?>
         <label for="pseudo">Pseudo</label><br>
         <input type="text" id="pseudo" name="pseudo"><br>
         <?= isset($errors['pseudo']) ? $errors['pseudo'] : '' ?>

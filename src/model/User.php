@@ -8,6 +8,9 @@ class User
     private $pseudo;
     private $password;
     private $role;
+    private $email;
+    private $name;
+    private $firstName;
 
     public function getId()
     {
@@ -47,5 +50,35 @@ class User
     public function setRole($role)
     {
         $this->role = $role;
+    }
+
+    public function getEmail()
+    {
+        return $this->email;
+    }
+
+    public function setEmail($email)
+    {
+        $this->email = $email;
+    }
+
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    public function setName($name)
+    {
+        $this->name = $name;
+    }
+
+    public function getFirstName()
+    {
+        return $this->firstName;
+    }
+
+    public function setFirstName($firstName)
+    {
+        $this->firstName = $firstName;
     }
 }

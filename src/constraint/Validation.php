@@ -17,6 +17,7 @@ class Validation
         } elseif ($name === 'User') {
             $userValidation = new UserValidation();
             $errors = $userValidation->check($data);
+            return $errors;
         }
     }
 }
