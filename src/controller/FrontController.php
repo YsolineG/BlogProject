@@ -81,10 +81,24 @@ class FrontController extends Controller
         return $this->view->render('login');
     }
 
-    public function contactForm()
+    public function contactForm(Parameter $post)
     {
-        var_dump($_POST);
-        var_dump($_GET);
+        var_dump($post);
+        if($post->get('submit')) {
+            $headers = array(
+                'From' => $post->get('lastname').' '.$post->get('firstname').' <'.$post->get('email').'>',
+                'Reply-To' => $post->get('email'),
+                'X-Mailer' => 'PHP/' . PHP_VERSION
+            );
+
+            mail(
+                'ysoline.ganster@gmail.com',
+                $post->get('object'),
+                $post->get('message'),
+                $headers
+            );
+        }
+
         return $this->view->render('contactForm');
     }
 }

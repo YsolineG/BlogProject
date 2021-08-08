@@ -39,3 +39,4 @@ foreach ($blogPosts as $blogPost) {
     <?php
 }
 ?>
+<a href="../public/index.php?route=contactForm">Formulaire de contact</a>

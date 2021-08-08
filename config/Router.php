@@ -55,6 +55,8 @@ class Router
                     $this->backController->administration();
                 } elseif ($route === 'deleteUser') {
                     $this->backController->deleteUser($this->request->getGet()->get('userId'));
+                } elseif ($route === 'contactForm') {
+                    $this->frontController->contactForm($this->request->getPost());
                 } else {
                     $this->errorController->errorNotFound();
                 }
