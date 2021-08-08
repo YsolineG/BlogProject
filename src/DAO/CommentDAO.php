@@ -3,6 +3,7 @@
 namespace BlogProject\src\DAO;
 
 use BlogProject\src\model\Comment;
+use BlogProject\src\model\User;
 
 class CommentDAO extends Database
 {
@@ -14,16 +15,25 @@ class CommentDAO extends Database
         $comment->setContent($row['content']);
         $comment->setCreatedAt($row['created_at']);
         $comment->setUpdatedAt($row['updated_at']);
-        $comment->setIdUser($row['id_user']);
+
+        $user = new User();
+        $user->setPseudo($row['user_pseudo']);
+//        $user->setPseudo($row['user_id']);
+        $comment->setUser($user);
+
         return $comment;
     }
 
     public function getComments($idBlogPost)
     {
-        $sql = 'SELECT comment_id, id_user, content, created_at, updated_at, comment_state FROM comment WHERE id_blog_post = ?';
-        $result =  $this->createQuery($sql, [$idBlogPost]);
+        $sql = 'SELECT comment.comment_id, comment.content, comment.created_at, comment.updated_at, comment.comment_state, user.pseudo AS user_pseudo
+                FROM comment
+                INNER JOIN user
+                ON comment.id_user = user.user_id
+                WHERE id_blog_post = ?';
+        $result = $this->createQuery($sql, [$idBlogPost]);
         $comments = [];
-        foreach ($result as $row){
+        foreach ($result as $row) {
             $commentId = $row['comment_id'];
             $comments[$commentId] = $this->buildObject($row);
         }

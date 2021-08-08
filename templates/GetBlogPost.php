@@ -1,4 +1,8 @@
-<?php $this->title = "Article";?>
+<?php
+
+use BlogProject\src\model\Comment;
+
+$this->title = "Article";?>
     <h1>Mon blog</h1>
     <div>
          <h2><?= htmlspecialchars($blogPost->getTitle())?></h2>
@@ -12,11 +16,13 @@
         <?php include('formComment.php')?>
         <h3>Commentaires</h3>
         <?php
+        /** @var Comment $comment */
         foreach ($comments as $comment)
         {
             ?>
             <p><?= htmlspecialchars($comment->getContent())?></p>
             <p>Posté le <?= htmlspecialchars($comment->getCreatedAt())?></p>
+            <p>Par <?= htmlspecialchars($comment->getUser()->getPseudo())?></p>
 
             <p><a href="../public/index.php?route=deleteComment&idComment=<?= $comment->getId() ?>">Supprimer le commentaire</a></p>
             <?php
