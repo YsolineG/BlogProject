@@ -69,3 +69,4 @@
     }
     ?>
 </table>
+<a href="../public/index.php">Retour à l'accueil</a>

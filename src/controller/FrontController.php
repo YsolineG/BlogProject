@@ -67,7 +67,7 @@ class FrontController extends Controller
             $result = $this->userDAO->login($post);
             if($result && $result['isPasswordValid']) {
                 $this->session->set('login', 'Content de vous revoir');
-                $this->session->set('id', $result['result']['id']);
+                $this->session->set('id', $result['result']['user_id']);
                 $this->session->set('role', $result['result']['name']);
                 $this->session->set('pseudo', $post->get('pseudo'));
                 header('Location:../public/index.php');
@@ -79,5 +79,12 @@ class FrontController extends Controller
             }
         }
         return $this->view->render('login');
+    }
+
+    public function contactForm()
+    {
+        var_dump($_POST);
+        var_dump($_GET);
+        return $this->view->render('contactForm');
     }
 }

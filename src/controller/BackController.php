@@ -10,7 +10,7 @@ class BackController extends Controller
             if($post->get('submit')) {
                 $errors = $this->validation->validate($post, 'BlogPost');
                 if (!$errors) {
-                    $this->blogPostDAO->addBlogPost($post);
+                    $this->blogPostDAO->addBlogPost($post, $this->session->get('id'));
                     $this->session->set('addBlogPost', 'Le nouvel article a bien été ajouté');
                     header('Location:../public/index.php?route=administration');
                 }
@@ -86,7 +86,7 @@ class BackController extends Controller
         }
     }
 
-    public function logout()
+    public function logout(): void
     {
         if($this->checkLoggedIn()){
             $this->logoutOrDeleteAccount('logout');
@@ -94,7 +94,7 @@ class BackController extends Controller
         }
     }
 
-    public function deleteAccount()
+    public function deleteAccount(): void
     {
         if($this->checkLoggedIn()){
             $this->userDAO->deleteAccount($this->session->get('pseudo'));
@@ -102,7 +102,7 @@ class BackController extends Controller
         }
     }
 
-    private function logoutOrDeleteAccount($param)
+    private function logoutOrDeleteAccount($param): void
     {
         $this->session->stop();
         $this->session->start();
