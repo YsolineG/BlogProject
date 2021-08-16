@@ -3,6 +3,8 @@
 namespace BlogProject\src\model;
 
 use BlogProject\config\Request;
+use Twig\Environment;
+use Twig\Loader\FilesystemLoader;
 
 class View
 {
@@ -38,5 +40,16 @@ class View
             return ob_get_clean();
         }
         header('Location: index.php?route=notFound');
+    }
+
+    public function renderTwig($template, $data = []): void
+    {
+        $data['session'] = $this->session;
+        $loader = new FilesystemLoader('../templates');
+        $twig = new Environment($loader, [
+            'debug' => true,
+        ]);
+        $twig->addExtension(new \Twig\Extension\DebugExtension());
+        echo $twig->render($template, $data);
     }
 }

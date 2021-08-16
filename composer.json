@@ -13,5 +13,9 @@
             "BlogProject\\config\\": "config/",
             "BlogProject\\src\\": "src/"
         }
+    },
+    "require": {
+        "ext-pdo": "*",
+        "twig/twig": "^3.0"
     }
 }

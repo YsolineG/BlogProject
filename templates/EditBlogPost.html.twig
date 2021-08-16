@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifier l'article{% endblock %}
+
+{% block body %}
+    <h1>Modifier l'article</h1>
+
+    <div>
+        {% include ('formBlogPost.html.twig') %}
+        <a href="../public/index.php">Retour à l'accueil</a>
+    </div>
+{% endblock %}

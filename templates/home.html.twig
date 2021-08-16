@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Accueil{% endblock %}
+
+{% block body %}
+    {{ session.show('addComment') }}
+    {{ session.show('deleteComment') }}
+    {{ session.show('register') }}
+    {{ session.show('login') }}
+    {{ session.show('logout') }}
+    {{ session.show('deleteAccount') }}
+
+    {% if session.get('pseudo') %}
+        <a href="../public/index.php?route=logout">Déconnexion</a>
+        <a href="../public/index.php?route=profile">Profil</a>
+        {% if session.get('role') == 'admin' %}
+            <a href="../public/index.php?route=administration">Administration</a>
+        {% endif %}
+        {% else %}
+            <a href="../public/index.php?route=register">Inscription</a>
+            <a href="../public/index.php?route=login">Connexion</a>
+    {% endif %}
+
+    <div class="container">
+        {% for blog in blogPosts %}
+            <h2>
+                <a href="../public/index.php?route=blogPost&idBlogPost={{ blog.id }}">
+                    {{ blog.title }}
+                </a>
+            </h2>
+            <p>{{ blog.content }}</p>
+            <p>Créé le {{ blog.createdAt }}</p>
+            <p>Modifié le {{ blog.updatedAt }}</p>
+        {% endfor %}
+    </div>
+
+    <a href="../public/index.php?route=contactForm">Formulaire de contact</a>
+{% endblock %}

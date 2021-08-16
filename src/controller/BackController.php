@@ -14,12 +14,12 @@ class BackController extends Controller
                     $this->session->set('addBlogPost', 'Le nouvel article a bien été ajouté');
                     header('Location:../public/index.php?route=administration');
                 }
-                return $this->view->render('addBlogPost', [
+                return $this->view->renderTwig('AddBlogPost.html.twig', [
                     'post' => $post,
                     'errors' => $errors
                 ]);
             }
-            return $this->view->render('addBlogPost');
+            return $this->view->renderTwig('AddBlogPost.html.twig');
         }
     }
 
@@ -34,7 +34,7 @@ class BackController extends Controller
                     $this->session->set('editBlogPost', 'l\'article a bien été modifié');
                     header('Location:../public/index.php?route=administration');
                 }
-                return $this->view->render('editBlogPost', [
+                return $this->view->renderTwig('EditBlogPost.html.twig', [
                     'post' => $post,
                     'errors' => $errors
                 ]);
@@ -43,7 +43,7 @@ class BackController extends Controller
             $post->set('title', $blogPost->getTitle());
             $post->set('content', $blogPost->getContent());
 
-            return $this->view->render('editBlogPost', [
+            return $this->view->renderTwig('EditBlogPost.html.twig', [
                 'post' => $post
             ]);
         }
@@ -70,7 +70,7 @@ class BackController extends Controller
     public function profile()
     {
         if($this->checkLoggedIn()) {
-            return $this->view->render('profile');
+            return $this->view->renderTwig('profile.html.twig');
         }
     }
 
@@ -82,7 +82,7 @@ class BackController extends Controller
                 $this->session->set('updatePassword', 'Le mot de passe a été mis à jour');
                 header('Location:../public/index.php?route=profile');
             }
-            return $this->view->render('updatePassword');
+            return $this->view->renderTwig('updatePassword.html.twig');
         }
     }
 
@@ -120,7 +120,7 @@ class BackController extends Controller
             $blogPosts = $this->blogPostDAO->getBlogPosts();
             $users = $this->userDAO->getUsers();
 
-            return $this->view->render('administration', [
+            return $this->view->renderTwig('administration.html.twig', [
                 'blogPosts' => $blogPosts,
                 'users' => $users
             ]);

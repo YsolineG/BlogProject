@@ -1,0 +1,61 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Administration{% endblock %}
+
+{% block body %}
+    <h1>Administration</h1>
+
+    {{ session.show('addBlogPost') }}
+    {{ session.show('editBlogPost') }}
+    {{ session.show('deleteBlogPost') }}
+    {{ session.show('deleteUser') }}
+
+    <h2>Articles</h2>
+    <a href="../public/index.php?route=addBlogPost">Nouvel article</a>
+    <table>
+        <tr>
+            <td>Id</td>
+            <td>Titre</td>
+            <td>Contenu</td>
+            <td>Date</td>
+            <td>Actions</td>
+        </tr>
+        {% for blog in blogPosts %}
+        <tr>
+            <td>{{ blog.id }}</td>
+            <td><a href="../public/index.php?route=blogPost&idBlogPost={{ blog.id }}">{{ blog.title }}</a></td>
+            <td>{{ blog.content }}</td>
+            <td>Créé le : {{ blog.createdAt }}</td>
+            <td>
+                <a href="../public/index.php?route=editBlogPost&idBlogPost={{ blog.id }}">Modifier</a>
+                <a href="../public/index.php?route=deleteBlogPost&idBlogPost={{ blog.id }}">Supprimer</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <h2>Utilisateurs</h2>
+    <table>
+        <tr>
+            <td>Id</td>
+            <td>Pseudo</td>
+            <td>Rôle</td>
+            <td>Actions</td>
+        </tr>
+        {% for user in users %}
+        <tr>
+            <td>{{ user.id }}</td>
+            <td>{{ user.pseudo }}</td>
+            <td>{{ user.role }}</td>
+            <td>
+                {% if user.role != 'admin' %}
+                <a href="../public/index.php?route=deleteUser&userId={{ user.id }}">Supprimer</a>
+                {% else %}
+                Suppression impossible
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+    <a href="../public/index.php">Retour à l'accueil</a>
+{% endblock %}

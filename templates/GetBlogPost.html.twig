@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Article{% endblock %}
+
+{% block body %}
+    <div>
+        <h2>{{ blogPost.title }}</h2>
+        <p>{{ blogPost.content }}</p>
+        <p>Créé le : {{ blogPost.createdAt }}</p>
+        <p>Modifié le : {{ blogPost.updatedAt }}</p>
+    </div>
+    <a href="../public/index.php">Retour à l'accueil</a>
+    <div>
+        <h3>Ajouter un commentaire</h3>
+        {% include('formComment.html.twig') %}
+        <h3>Commentaires</h3>
+
+        {% for comment in comments %}
+        <p>{{ comment.content }}</p>
+        <p>Posté le {{ comment.createdAt }}</p>
+        <p>Par {{ comment.user.pseudo }}</p>
+
+        <p><a href="../public/index.php?route=deleteComment&idComment={{ comment.id }}">Supprimer le commentaire</a></p>
+        {% endfor %}
+    </div>
+{% endblock %}

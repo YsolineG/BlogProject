@@ -9,16 +9,14 @@ class FrontController extends Controller
     public function home()
     {
         $blogPosts = $this->blogPostDAO->getBlogPosts();
-        return $this->view->render('home', [
-            'blogPosts' => $blogPosts
-        ]);
+        $this->view->renderTwig('home.html.twig', ['blogPosts' => $blogPosts]);
     }
 
     public function blogPost($idBlogPost)
     {
         $blogPost = $this->blogPostDAO->getBlogPost($idBlogPost);
         $comments = $this->commentDAO->getComments($idBlogPost);
-        return $this->view->render('GetBlogPost', [
+        return $this->view->renderTwig('GetBlogPost.html.twig', [
             'blogPost' => $blogPost,
             'comments' => $comments
         ]);
@@ -35,7 +33,7 @@ class FrontController extends Controller
             }
             $blogPost = $this->blogPostDAO->getBlogPost($idBlogPost);
             $comments = $this->commentDAO->getComments($idBlogPost);
-            return $this->view->render('getBlogPost', [
+            return $this->view->renderTwig('GetBlogPost.html.twig', [
                 'blogPost' => $blogPost,
                 'comments' => $comments,
                 'post' => $post,
@@ -53,12 +51,12 @@ class FrontController extends Controller
                 $this->session->set('register', 'Votre inscription a bien été effectuée');
                 header('Location:../public/index.php');
             }
-            return $this->view->render('register', [
+            return $this->view->renderTwig('register.html.twig', [
                 'post' => $post,
                 'errors' => $errors
             ]);
         }
-        return $this->view->render('register');
+        return $this->view->renderTwig('register.html.twig');
     }
 
     public function login($post)
@@ -73,12 +71,12 @@ class FrontController extends Controller
                 header('Location:../public/index.php');
             } else {
                 $this->session->set('error_login', 'Le pseudo ou le mot de passe sont incorrects');
-                return $this->view->render('login', [
+                return $this->view->renderTwig('loginL.html.twig', [
                     'post' => $post
                 ]);
             }
         }
-        return $this->view->render('login');
+        return $this->view->renderTwig('login.html.twig');
     }
 
     public function contactForm(Parameter $post)
@@ -99,6 +97,6 @@ class FrontController extends Controller
             );
         }
 
-        return $this->view->render('contactForm');
+        return $this->view->renderTwig('contactForm.html.twig');
     }
 }

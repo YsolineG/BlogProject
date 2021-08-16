@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    {% set route = post is defined and post.get('blog_post_id') ? 'editBlogPost&idBlogPost='~post.get('blog_post_id') : 'addBlogPost' %}
+    {% set submit = route == 'addBlogPost' ? 'Envoyer' : 'Mettre à jour' %}
+
+    <form method="post" action="../public/index.php?route={{ route }}">
+        <label for="title">Titre</label><br>
+        <input type="text" id="title" name="title" value="{{ post is defined ? post.get('title'): '' }}"><br>
+        {{ errors['title'] is defined ? errors['title'] : '' }}
+        <label for="content">Contenu</label><br>
+        <textarea id="content" name="content">{{ post is defined ? post.get('content') : '' }}</textarea><br>
+        {{ errors['content'] is defined ? errors['content'] : '' }}
+        <input type="submit" value="{{ submit }}" id="submit" name="submit">
+    </form>
+{% endblock %}
