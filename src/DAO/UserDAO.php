@@ -15,6 +15,7 @@ class UserDAO extends Database
         $user->setName($row['name']);
         $user->setEmail($row['email']);
         $user->setFirstName($row['firstname']);
+        $user->setRole($row['name']);
         return $user;
     }
 
