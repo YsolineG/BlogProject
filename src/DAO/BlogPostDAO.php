@@ -2,8 +2,8 @@
 
 namespace BlogProject\src\DAO;
 
-use BlogProject\config\Parameter;
 use BlogProject\src\model\BlogPost;
+use BlogProject\src\model\User;
 
 class BlogPostDAO extends Database
 {
@@ -16,12 +16,20 @@ class BlogPostDAO extends Database
         $blogPost->setContent($row['content']);
         $blogPost->setCreatedAt($row['created_at']);
         $blogPost->setUpdatedAt($row['updated_at']);
+
+        $user = new User();
+        $user->setPseudo($row['user_pseudo']);
+        $blogPost->setUser($user);
+
         return $blogPost;
     }
 
     public function getBlogPosts()
     {
-        $sql = 'SELECT blog_post_id, title, content, created_at, updated_at, url_picture FROM blog_post';
+        $sql = 'SELECT blog_post.blog_post_id, blog_post.title, blog_post.content, blog_post.created_at, blog_post.updated_at, url_picture, user.pseudo AS user_pseudo
+                FROM blog_post
+                INNER JOIN user
+                ON blog_post.id_user = user.user_id';
         $result = $this->createQuery($sql);
         $blogPosts = [];
         foreach ($result as $row) {
@@ -34,7 +42,11 @@ class BlogPostDAO extends Database
 
     public function getBlogPost($idBlogPost)
     {
-        $sql = 'SELECT blog_post_id, title, content, created_at, updated_at, url_picture FROM blog_post WHERE blog_post_id = ?';
+        $sql = 'SELECT blog_post.blog_post_id, blog_post.title, blog_post.content, blog_post.created_at, blog_post.updated_at, url_picture, user.pseudo AS user_pseudo
+                FROM blog_post
+                INNER JOIN user
+                ON blog_post.id_user = user.user_id
+                WHERE blog_post_id = ?';
         $result =  $this->createQuery($sql, [$idBlogPost]);
         $blogPost = $result->fetch();
         $result->closeCursor();

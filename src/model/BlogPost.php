@@ -9,6 +9,7 @@ class BlogPost
     private $content;
     private $createdAt;
     private $updatedAt;
+    private $user;
 
     public function getId()
     {
@@ -59,5 +60,15 @@ class BlogPost
     public function setUpdatedAt($updatedAt)
     {
         $this->updatedAt = $updatedAt;
+    }
+
+    public function setUser(User $user)
+    {
+        $this->user = $user;
+    }
+
+    public function getUser(): User
+    {
+        return $this->user;
     }
 }
