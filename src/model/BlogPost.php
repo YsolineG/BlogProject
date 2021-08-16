@@ -10,6 +10,7 @@ class BlogPost
     private $createdAt;
     private $updatedAt;
     private $user;
+    private $chapeau;
 
     public function getId()
     {
@@ -70,5 +71,15 @@ class BlogPost
     public function getUser(): User
     {
         return $this->user;
+    }
+
+    public function getChapeau()
+    {
+        return $this->chapeau;
+    }
+
+    public function setChapeau($chapeau)
+    {
+        $this->chapeau = $chapeau;
     }
 }

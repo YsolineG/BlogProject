@@ -41,6 +41,7 @@ class BackController extends Controller
             }
             $post->set('blog_post_id', $blogPost->getId());
             $post->set('title', $blogPost->getTitle());
+            $post->set('chapeau', $blogPost->getChapeau());
             $post->set('content', $blogPost->getContent());
 
             return $this->view->renderTwig('EditBlogPost.html.twig', [

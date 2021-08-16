@@ -18,7 +18,6 @@ class CommentDAO extends Database
 
         $user = new User();
         $user->setPseudo($row['user_pseudo']);
-//        $user->setPseudo($row['user_id']);
         $comment->setUser($user);
 
         return $comment;

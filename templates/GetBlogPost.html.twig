@@ -4,7 +4,8 @@
 
 {% block body %}
     <div>
-        <h2>{{ blogPost.title }}</h2>
+        <h1>{{ blogPost.title }}</h1>
+        <h3>{{ blogPost.chapeau }}</h3>
         <p>{{ blogPost.content }}</p>
         <p>Créé le : {{ blogPost.createdAt }}</p>
         <p>Par {{ blogPost.user.pseudo }}</p>

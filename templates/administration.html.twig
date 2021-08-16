@@ -16,6 +16,8 @@
         <tr>
             <td>Id</td>
             <td>Titre</td>
+            <td>Auteur</td>
+            <td>Chapeau</td>
             <td>Contenu</td>
             <td>Date</td>
             <td>Actions</td>
@@ -24,7 +26,9 @@
         <tr>
             <td>{{ blog.id }}</td>
             <td><a href="../public/index.php?route=blogPost&idBlogPost={{ blog.id }}">{{ blog.title }}</a></td>
-            <td>{{ blog.content }}</td>
+            <td>{{ blog.user.pseudo }}</td>
+            <td>{{ blog.chapeau }}</td>
+            <td>{{ blog.content | striptags | slice(0, 200) }}</td>
             <td>Créé le : {{ blog.createdAt }}</td>
             <td>
                 <a href="../public/index.php?route=editBlogPost&idBlogPost={{ blog.id }}">Modifier</a>

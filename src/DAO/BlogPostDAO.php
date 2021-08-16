@@ -16,6 +16,7 @@ class BlogPostDAO extends Database
         $blogPost->setContent($row['content']);
         $blogPost->setCreatedAt($row['created_at']);
         $blogPost->setUpdatedAt($row['updated_at']);
+        $blogPost->setChapeau($row['chapeau']);
 
         $user = new User();
         $user->setPseudo($row['user_pseudo']);
@@ -26,7 +27,7 @@ class BlogPostDAO extends Database
 
     public function getBlogPosts()
     {
-        $sql = 'SELECT blog_post.blog_post_id, blog_post.title, blog_post.content, blog_post.created_at, blog_post.updated_at, url_picture, user.pseudo AS user_pseudo
+        $sql = 'SELECT blog_post.blog_post_id, blog_post.title, blog_post.chapeau, blog_post.content, blog_post.created_at, blog_post.updated_at, url_picture, user.pseudo AS user_pseudo
                 FROM blog_post
                 INNER JOIN user
                 ON blog_post.id_user = user.user_id';
@@ -42,7 +43,7 @@ class BlogPostDAO extends Database
 
     public function getBlogPost($idBlogPost)
     {
-        $sql = 'SELECT blog_post.blog_post_id, blog_post.title, blog_post.content, blog_post.created_at, blog_post.updated_at, url_picture, user.pseudo AS user_pseudo
+        $sql = 'SELECT blog_post.blog_post_id, blog_post.title, blog_post.chapeau, blog_post.content, blog_post.created_at, blog_post.updated_at, url_picture, user.pseudo AS user_pseudo
                 FROM blog_post
                 INNER JOIN user
                 ON blog_post.id_user = user.user_id
@@ -55,15 +56,21 @@ class BlogPostDAO extends Database
 
     public function addBlogPost($post, $userId)
     {
-        $sql = 'INSERT INTO blog_post(title, content, created_at, id_user) VALUES (?,?,NOW(),?)';
-        $this->createQuery($sql,[$post->get('title'), $post->get('content'), $userId]);
+        $sql = 'INSERT INTO blog_post(title, chapeau, content, created_at, id_user) VALUES (?,?,?,NOW(),?)';
+        $this->createQuery($sql, [
+            $post->get('title'),
+            $post->get('chapeau'),
+            $post->get('content'),
+            $userId
+        ]);
     }
 
     public function editBlogPost($post, $idBlogPost)
     {
-        $sql = 'UPDATE blog_post SET title = :title, content = :content, updated_at = NOW() WHERE blog_post_id=:idBlogPost';
+        $sql = 'UPDATE blog_post SET title = :title, chapeau = :chapeau, content = :content, updated_at = NOW() WHERE blog_post_id=:idBlogPost';
         $this->createQuery($sql, [
             'title' => $post->get('title'),
+            'chapeau' => $post->get('chapeau'),
             'content' => $post->get('content'),
             'idBlogPost' => $idBlogPost
         ]);
