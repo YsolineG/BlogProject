@@ -15,7 +15,7 @@ class FrontController extends Controller
     public function blogPost($idBlogPost)
     {
         $blogPost = $this->blogPostDAO->getBlogPost($idBlogPost);
-        $comments = $this->commentDAO->getComments($idBlogPost);
+        $comments = $this->commentDAO->getCommentsForBlogPostId($idBlogPost);
         return $this->view->renderTwig('GetBlogPost.html.twig', [
             'blogPost' => $blogPost,
             'comments' => $comments
@@ -32,7 +32,7 @@ class FrontController extends Controller
                 header('Location:../public/index.php?route=blogPost&idBlogPost='.$idBlogPost);
             }
             $blogPost = $this->blogPostDAO->getBlogPost($idBlogPost);
-            $comments = $this->commentDAO->getComments($idBlogPost);
+            $comments = $this->commentDAO->getCommentsForBlogPostId($idBlogPost);
             return $this->view->renderTwig('GetBlogPost.html.twig', [
                 'blogPost' => $blogPost,
                 'comments' => $comments,
@@ -46,6 +46,12 @@ class FrontController extends Controller
     {
         if($post->get('submit')) {
             $errors = $this->validation->validate($post, 'User');
+            if($this->userDAO->checkUserPseudo($post)){
+                $errors['pseudo'] = $this->userDAO->checkUserPseudo($post);
+            }
+            if($this->userDAO->checkUserEmail($post)){
+                $errors['email'] = $this->userDAO->checkUserEmail($post);
+            }
             if(!$errors) {
                 $this->userDAO->register($post);
                 $this->session->set('register', 'Votre inscription a bien été effectuée');

@@ -13,7 +13,7 @@
             <input type="text" id="firstName" name="firstname"><br>
             {{ errors['firstname'] ? errors['firstname'] : '' }}
             <label for="pseudo">Pseudo</label><br>
-            <input type="text" id="pseudo" name="pseudo"><br>
+            <input type="text" id="pseudo" name="pseudo" value="{{ post ? post.get('pseudo') }}"><br>
             {{ errors['pseudo'] ? errors['pseudo'] : '' }}
             <label for="password">Mot de passe</label><br>
             <input type="password" id="password" name="password"><br>

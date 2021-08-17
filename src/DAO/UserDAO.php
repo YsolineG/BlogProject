@@ -77,4 +77,24 @@ class UserDAO extends Database
         $sql = 'DELETE FROM user WHERE user_id = ?';
         $this->createQuery($sql, [$userId]);
     }
+
+    public function checkUserPseudo($post)
+    {
+        $sql = 'SELECT COUNT(pseudo) FROM user WHERE pseudo = ?';
+        $result = $this->createQuery($sql, [$post->get('pseudo')]);
+        $isUnique = $result->fetchColumn();
+        if($isUnique){
+            return 'Le pseudo existe déjà';
+        }
+    }
+
+    public function checkUserEmail($post)
+    {
+        $sql = 'SELECT COUNT(email) FROM user WHERE email = ?';
+        $result = $this->createQuery($sql, [$post->get('email')]);
+        $isUnique = $result->fetchColumn();
+        if($isUnique){
+            return 'L\'email existe déjà';
+        }
+    }
 }

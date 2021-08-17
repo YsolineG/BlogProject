@@ -28,7 +28,7 @@ abstract class Database
          }
      }
 
-     protected function createQuery($sql, $parameters = null)
+     protected function createQuery($sql, array $parameters = [])
      {
          if ($parameters) {
              $result = $this->checkConnection()->prepare($sql);
