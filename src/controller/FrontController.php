@@ -77,7 +77,7 @@ class FrontController extends Controller
                 header('Location:../public/index.php');
             } else {
                 $this->session->set('error_login', 'Le pseudo ou le mot de passe sont incorrects');
-                return $this->view->renderTwig('loginL.html.twig', [
+                return $this->view->renderTwig('login.html.twig', [
                     'post' => $post
                 ]);
             }
