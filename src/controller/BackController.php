@@ -64,7 +64,7 @@ class BackController extends Controller
         if($this->checkAdmin()){
             $this->commentDAO->deleteComment($idComment);
             $this->session->set('deleteComment', 'Le commentaire a bien été supprimé');
-            header('Location:../public/index.php');
+            header('Location:../public/index.php?route=administration');
         }
     }
 
@@ -120,10 +120,11 @@ class BackController extends Controller
         if($this->checkAdmin()) {
             $blogPosts = $this->blogPostDAO->getBlogPosts();
             $users = $this->userDAO->getUsers();
-
+            $comments = $this->commentDAO->getInvalidComments();
             return $this->view->renderTwig('administration.html.twig', [
                 'blogPosts' => $blogPosts,
-                'users' => $users
+                'users' => $users,
+                'comments' => $comments
             ]);
         }
     }
@@ -155,6 +156,15 @@ class BackController extends Controller
             header('Location:../public/index.php?route=profile');
         } else {
             return true;
+        }
+    }
+
+    public function validateComment($idComment)
+    {
+        if($this->checkAdmin()){
+            $this->commentDAO->validateComment($idComment);
+            $this->session->set('validateComment', 'Le commentaire a été validé');
+            header('Location:../public/index.php?route=administration');
         }
     }
 }

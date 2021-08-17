@@ -9,6 +9,8 @@
     {{ session.show('editBlogPost') }}
     {{ session.show('deleteBlogPost') }}
     {{ session.show('deleteUser') }}
+    {{ session.show('deleteComment') }}
+    {{ session.show('validateComment') }}
 
     <h2>Articles</h2>
     <a href="../public/index.php?route=addBlogPost">Nouvel article</a>
@@ -59,6 +61,29 @@
                 {% endif %}
             </td>
         </tr>
+        {% endfor %}
+    </table>
+
+    <h2>Commentaires en attente de validation</h2>
+    <table>
+        <tr>
+            <td>Id</td>
+            <td>Pseudo</td>
+            <td>Article</td>
+            <td>Contenu</td>
+            <td>Actions</td>
+        </tr>
+        {% for comment in comments %}
+                <tr>
+                    <td>{{ comment.id }}</td>
+                    <td>{{ comment.user.pseudo }}</td>
+                    <td>{{ comment.blogPost.title }}</td>
+                    <td>{{ comment.content }}</td>
+                    <td>
+                        <a href="../public/index.php?route=deleteComment&idComment={{ comment.id }}">Supprimer le commentaire</a>
+                        <a href="../public/index.php?route=validateComment&idComment={{ comment.id }}">Valider le commentaire</a>
+                    </td>
+                </tr>
         {% endfor %}
     </table>
     <a href="../public/index.php">Retour à l'accueil</a>

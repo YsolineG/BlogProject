@@ -18,11 +18,9 @@
         <h3>Commentaires</h3>
 
         {% for comment in comments %}
-        <p>{{ comment.content }}</p>
-        <p>Posté le {{ comment.createdAt }}</p>
-        <p>Par {{ comment.user.pseudo }}</p>
-
-        <p><a href="../public/index.php?route=deleteComment&idComment={{ comment.id }}">Supprimer le commentaire</a></p>
+                <p>{{ comment.content }}</p>
+                <p>Posté le {{ comment.createdAt }}</p>
+                <p>Par {{ comment.user.pseudo }}</p>
         {% endfor %}
     </div>
 {% endblock %}

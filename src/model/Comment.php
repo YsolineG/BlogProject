@@ -9,6 +9,7 @@ class Comment
     private $createdAt;
     private $updatedAt;
     private $user;
+    private $commentState;
 
     public function getId()
     {
@@ -58,5 +59,15 @@ class Comment
     public function getUser(): User
     {
         return $this->user;
+    }
+
+    public function getCommentState()
+    {
+        return $this->commentState;
+    }
+
+    public function setCommentState($commentState)
+    {
+        $this->commentState = $commentState;
     }
 }

@@ -57,6 +57,8 @@ class Router
                     $this->backController->deleteUser($this->request->getGet()->get('userId'));
                 } elseif ($route === 'contactForm') {
                     $this->frontController->contactForm($this->request->getPost());
+                } elseif ($route === 'validateComment') {
+                    $this->backController->validateComment($this->request->getGet()->get('idComment'));
                 } else {
                     $this->errorController->errorNotFound();
                 }
