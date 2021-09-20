@@ -27,8 +27,8 @@ class FrontController extends Controller
         if($post->get('submit')) {
             $errors = $this->validation->validate($post, 'Comment');
             if(!$errors) {
-                $comment = $this->commentDAO->addComment($post, $idBlogPost, $this->session->get('id'));
-                $this->session->set('addComment', 'Le nouveau commentaire a bien été ajouté');
+                $this->commentDAO->addComment($post, $idBlogPost, $this->session->get('id'));
+                $this->session->set('addComment', 'Le commentaire a bien été ajouté et est en attente de validation');
                 header('Location:../public/index.php?route=blogPost&idBlogPost='.$idBlogPost);
             }
             $blogPost = $this->blogPostDAO->getBlogPost($idBlogPost);
@@ -76,7 +76,7 @@ class FrontController extends Controller
                 $this->session->set('pseudo', $post->get('pseudo'));
                 header('Location:../public/index.php');
             } else {
-                $this->session->set('error_login', 'Le pseudo ou le mot de passe sont incorrects');
+                $this->session->set('error_login', 'Le pseudo ou le mot de passe est incorrect');
                 return $this->view->renderTwig('login.html.twig', [
                     'post' => $post
                 ]);
@@ -104,5 +104,11 @@ class FrontController extends Controller
         }
 
         return $this->view->renderTwig('contactForm.html.twig');
+    }
+
+    public function allBlogPosts()
+    {
+        $blogPosts = $this->blogPostDAO->getBlogPosts();
+        $this->view->renderTwig('allBlogPosts.html.twig', ['blogPosts' => $blogPosts]);
     }
 }

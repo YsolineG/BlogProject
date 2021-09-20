@@ -11,7 +11,7 @@ class BackController extends Controller
                 $errors = $this->validation->validate($post, 'BlogPost');
                 if (!$errors) {
                     $this->blogPostDAO->addBlogPost($post, $this->session->get('id'));
-                    $this->session->set('addBlogPost', 'Le nouvel article a bien été ajouté');
+                    $this->session->set('successMessage', 'Le nouvel article a bien été ajouté');
                     header('Location:../public/index.php?route=administration');
                 }
                 return $this->view->renderTwig('AddBlogPost.html.twig', [
@@ -31,7 +31,7 @@ class BackController extends Controller
                 $errors = $this->validation->validate($post, 'BlogPost');
                 if (!$errors) {
                     $this->blogPostDAO->editBlogPost($post, $idBlogPost, $this->session->get('blog_post_id'));
-                    $this->session->set('editBlogPost', 'l\'article a bien été modifié');
+                    $this->session->set('successMessage', 'l\'article a bien été modifié');
                     header('Location:../public/index.php?route=administration');
                 }
                 return $this->view->renderTwig('EditBlogPost.html.twig', [
@@ -54,7 +54,7 @@ class BackController extends Controller
     {
         if($this->checkAdmin()){
             $this->blogPostDAO->deleteBlogPost($idBlogPost);
-            $this->session->set('deleteBlogPost', 'L\'article a bien été supprimé');
+            $this->session->set('successMessage', 'L\'article a bien été supprimé');
             header('Location:../public/index.php?route=administration');
         }
     }
@@ -63,7 +63,7 @@ class BackController extends Controller
     {
         if($this->checkAdmin()){
             $this->commentDAO->deleteComment($idComment);
-            $this->session->set('deleteComment', 'Le commentaire a bien été supprimé');
+            $this->session->set('successMessage', 'Le commentaire a bien été supprimé');
             header('Location:../public/index.php?route=administration');
         }
     }
@@ -80,7 +80,7 @@ class BackController extends Controller
         if($this->checkLoggedIn()) {
             if($post->get('submit')) {
                 $this->userDAO->updatePassword($post, $this->session->get('pseudo'));
-                $this->session->set('updatePassword', 'Le mot de passe a été mis à jour');
+                $this->session->set('successMessage', 'Le mot de passe a été mis à jour');
                 header('Location:../public/index.php?route=profile');
             }
             return $this->view->renderTwig('updatePassword.html.twig');
@@ -133,7 +133,7 @@ class BackController extends Controller
     {
         if($this->checkAdmin()) {
             $this->userDAO->deleteUser($userId);
-            $this->session->set('deleteUser', 'L\'utilisateur a bien été supprimé');
+            $this->session->set('successMessage', 'L\'utilisateur a bien été supprimé');
             header('Location:../public/index.php?route=administration');
         }
     }
@@ -141,7 +141,7 @@ class BackController extends Controller
     public function checkLoggedIn()
     {
         if(!$this->session->get('pseudo')) {
-            $this->session->set('neddLogin', 'Vous devez vous connecter pour accéder à cette page');
+            $this->session->set('needLogin', 'Vous devez vous connecter pour accéder à cette page');
             header('Location:../public/index.php?route=login');
         } else {
             return true;
@@ -151,8 +151,8 @@ class BackController extends Controller
     public function checkAdmin()
     {
         $this->checkLoggedIn();
-        if(!$this->session->get('role') === 'admin') {
-            $this->session->set('notAdmain', 'Vous n\'ave pas le droit d\'accéder à cette page');
+        if($this->session->get('role') !== 'admin') {
+            $this->session->set('notAdmin', 'Vous n\'avez pas le droit d\'accéder à cette page');
             header('Location:../public/index.php?route=profile');
         } else {
             return true;
@@ -163,7 +163,7 @@ class BackController extends Controller
     {
         if($this->checkAdmin()){
             $this->commentDAO->validateComment($idComment);
-            $this->session->set('validateComment', 'Le commentaire a été validé');
+            $this->session->set('successMessage', 'Le commentaire a été validé');
             header('Location:../public/index.php?route=administration');
         }
     }
