@@ -3,14 +3,20 @@
 {% block title %}Inscription{% endblock %}
 
 {% block body %}
-    <section id="contact">
+    <header>
         <div class="container">
             <div class="row">
-                <div class="col-lg-12 text-center">
-                    <h2>Inscription</h2>
-                    <hr class="star-primary">
+                <div class="col-lg-12">
+                    <div class="intro-text">
+                        <span class="name">Inscription</span>
+                        <hr class="star-light">
+                    </div>
                 </div>
             </div>
+        </div>
+    </header>
+    <section id="contact">
+        <div class="container">
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2">
                     <!-- To configure the contact form email address, go to mail/contact_me.php and update the email address in the PHP file on line 19. -->
@@ -20,40 +26,35 @@
                             <div class="form-group col-xs-12 floating-label-form-group controls">
                                 <label for="name">Nom</label>
                                 <input type="text" class="form-control" placeholder="Nom" id="name" name="name">
-                                {{ errors['name'] ? errors['name'] : '' }}
-                                <p class="help-block text-danger"></p>
+                                <p class="text-danger">{{ errors['name'] ? errors['name'] : '' }}</p>
                             </div>
                         </div>
                         <div class="row control-group">
                             <div class="form-group col-xs-12 floating-label-form-group controls">
                                 <label for="firstname">Prénom</label>
                                 <input type="text" class="form-control" placeholder="Prénom" id="firstname" name="firstname">
-                                {{ errors['firstname'] ? errors['firstname'] : '' }}
-                                <p class="help-block text-danger"></p>
+                                <p class="text-danger">{{ errors['firstname'] ? errors['firstname'] : '' }}</p>
                             </div>
                         </div>
                         <div class="row control-group">
                             <div class="form-group col-xs-12 floating-label-form-group controls">
                                 <label for="pseudo">Pseudo</label>
                                 <input type="text" class="form-control" placeholder="Pseudo" id="pseudo" name="pseudo" value="{{ post ? post.get('pseudo') }}">
-                                {{ errors['pseudo'] ? errors['pseudo'] : '' }}
-                                <p class="help-block text-danger"></p>
+                                <p class="text-danger">{{ errors['pseudo'] ? errors['pseudo'] : '' }}</p>
                             </div>
                         </div>
                         <div class="row control-group">
                             <div class="form-group col-xs-12 floating-label-form-group controls">
                                 <label for="email">Email</label>
                                 <input type="email" class="form-control" placeholder="Email" id="email" name="email">
-                                {{ errors['email'] ? errors['email'] : '' }}
-                                <p class="help-block text-danger"></p>
+                                <p class="text-danger">{{ errors['email'] ? errors['email'] : '' }}</p>
                             </div>
                         </div>
                         <div class="row control-group">
                             <div class="form-group col-xs-12 floating-label-form-group controls">
                                 <label for="password">Mot de passe</label>
                                 <input type="password" class="form-control" placeholder="Mot de passe" id="password" name="password">
-                                {{ errors['password'] ? errors['password'] : '' }}
-                                <p class="help-block text-danger"></p>
+                                <p class="text-danger">{{ errors['password'] ? errors['password'] : '' }}</p>
                             </div>
                         </div>
                         <br>

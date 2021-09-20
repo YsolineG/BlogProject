@@ -1,19 +1,45 @@
-{% extends 'base.html.twig' %}
-
-{% block body %}
     {% set route = post is defined and post.get('blog_post_id') ? 'editBlogPost&idBlogPost='~post.get('blog_post_id') : 'addBlogPost' %}
     {% set submit = route == 'addBlogPost' ? 'Envoyer' : 'Mettre à jour' %}
-
-    <form method="post" action="../public/index.php?route={{ route }}">
-        <label for="title">Titre</label><br>
-        <input type="text" id="title" name="title" value="{{ post is defined ? post.get('title'): '' }}"><br>
-        {{ errors['title'] is defined ? errors['title'] : '' }}
-        <label for="chapeau">Chapeau</label><br>
-        <input type="text" id="chapeau" name="chapeau" value="{{ post is defined ? post.get('chapeau') : '' }}"><br>
-        {{ errors['chapeau'] is defined ? errors['chapeau'] : '' }}
-        <label for="content">Contenu</label><br>
-        <textarea id="content" name="content">{{ post is defined ? post.get('content') : '' }}</textarea><br>
-        {{ errors['content'] is defined ? errors['content'] : '' }}
-        <input type="submit" value="{{ submit }}" id="submit" name="submit">
-    </form>
-{% endblock %}
+    <script>
+        tinymce.init({
+            selector: '#mytextarea'
+        });
+    </script>
+    <section>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2">
+                    <form method="post" action="../public/index.php?route={{ route }}">
+                        <div class="row control-group">
+                            <div class="form-group col-xs-12 floating-label-form-group controls">
+                                <label for="title">Titre</label>
+                                <input type="text" class="form-control" placeholder="Titre" id="title" name="title" value="{{ post is defined ? post.get('title'): '' }}">
+                                <p class="text-danger">{{ errors['title'] is defined ? errors['title'] : '' }}</p>
+                            </div>
+                        </div>
+                        <div class="row control-group">
+                            <div class="form-group col-xs-12 floating-label-form-group controls">
+                                <label for="chapeau">Chapeau</label>
+                                <input type="text" class="form-control" placeholder="Chapeau" id="chapeau" name="chapeau" value="{{ post is defined ? post.get('chapeau') : '' }}">
+                                <p class="text-danger">{{ errors['chapeau'] is defined ? errors['chapeau'] : '' }}</p>
+                            </div>
+                        </div>
+                        <div class="row control-group">
+                            <div class="form-group col-xs-12 floating-label-form-group controls">
+                                <label for="mytextarea">Contenu</label>
+                                <textarea rows="5" class="content" placeholder="Contenu" id="mytextarea" name="content">{{ post is defined ? post.get('content') : '' }}</textarea>
+                                <p class="text-danger">{{ errors['content'] is defined ? errors['content'] : '' }}</p>
+                            </div>
+                        </div>
+                        <br>
+                        <div id="success"></div>
+                        <div class="row">
+                            <div class="form-group col-xs-12">
+                                <input type="submit" value="{{ submit }}" id="submit" name="submit" class="btn btn-success btn-lg">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>

@@ -3,88 +3,116 @@
 {% block title %}Administration{% endblock %}
 
 {% block body %}
-    <h1>Administration</h1>
-
-    {{ session.show('addBlogPost') }}
-    {{ session.show('editBlogPost') }}
-    {{ session.show('deleteBlogPost') }}
-    {{ session.show('deleteUser') }}
-    {{ session.show('deleteComment') }}
-    {{ session.show('validateComment') }}
-
-    <h2>Articles</h2>
-    <a href="../public/index.php?route=addBlogPost">Nouvel article</a>
-    <table>
-        <tr>
-            <td>Id</td>
-            <td>Titre</td>
-            <td>Auteur</td>
-            <td>Chapeau</td>
-            <td>Contenu</td>
-            <td>Date</td>
-            <td>Actions</td>
-        </tr>
-        {% for blog in blogPosts %}
-        <tr>
-            <td>{{ blog.id }}</td>
-            <td><a href="../public/index.php?route=blogPost&idBlogPost={{ blog.id }}">{{ blog.title }}</a></td>
-            <td>{{ blog.user.pseudo }}</td>
-            <td>{{ blog.chapeau }}</td>
-            <td>{{ blog.content | striptags | slice(0, 200) }}</td>
-            <td>Créé le : {{ blog.createdAt }}</td>
-            <td>
-                <a href="../public/index.php?route=editBlogPost&idBlogPost={{ blog.id }}">Modifier</a>
-                <a href="../public/index.php?route=deleteBlogPost&idBlogPost={{ blog.id }}">Supprimer</a>
-            </td>
-        </tr>
-        {% endfor %}
-    </table>
-
-    <h2>Utilisateurs</h2>
-    <table>
-        <tr>
-            <td>Id</td>
-            <td>Pseudo</td>
-            <td>Rôle</td>
-            <td>Actions</td>
-        </tr>
-        {% for user in users %}
-        <tr>
-            <td>{{ user.id }}</td>
-            <td>{{ user.pseudo }}</td>
-            <td>{{ user.role }}</td>
-            <td>
-                {% if user.role != 'admin' %}
-                <a href="../public/index.php?route=deleteUser&userId={{ user.id }}">Supprimer</a>
-                {% else %}
-                Suppression impossible
-                {% endif %}
-            </td>
-        </tr>
-        {% endfor %}
-    </table>
-
-    <h2>Commentaires en attente de validation</h2>
-    <table>
-        <tr>
-            <td>Id</td>
-            <td>Pseudo</td>
-            <td>Article</td>
-            <td>Contenu</td>
-            <td>Actions</td>
-        </tr>
-        {% for comment in comments %}
+    <header>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="intro-text">
+                        <span class="name">Administration</span>
+                        <hr class="star-light">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <section>
+        <p class="text-success text-center">{{ session.show('successMessage') }}</p>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2>Articles</h2>
+                    <hr class="star-primary">
+                    <p><a href="../public/index.php?route=addBlogPost" class="btn btn-success btn-lg" role="button">Nouvel article</a></p>
+                </div>
+            </div>
+            <table class="table table-bordered table-striped">
                 <tr>
-                    <td>{{ comment.id }}</td>
-                    <td>{{ comment.user.pseudo }}</td>
-                    <td>{{ comment.blogPost.title }}</td>
-                    <td>{{ comment.content }}</td>
-                    <td>
-                        <a href="../public/index.php?route=deleteComment&idComment={{ comment.id }}">Supprimer le commentaire</a>
-                        <a href="../public/index.php?route=validateComment&idComment={{ comment.id }}">Valider le commentaire</a>
+                    <td>Id</td>
+                    <td>Titre</td>
+                    <td>Auteur</td>
+                    <td>Chapeau</td>
+                    <td>Contenu</td>
+                    <td>Date</td>
+                    <td class="text-center">Actions</td>
+                </tr>
+                {% for blog in blogPosts %}
+                <tr>
+                    <td>{{ blog.id }}</td>
+                    <td><a href="../public/index.php?route=blogPost&idBlogPost={{ blog.id }}">{{ blog.title }}</a></td>
+                    <td>{{ blog.user.pseudo }}</td>
+                    <td>{{ blog.chapeau }}</td>
+                    <td>{{ blog.content | striptags | slice(0, 200) }}</td>
+                    <td>Créé le : {{ blog.createdAt }}</td>
+                    <td class="text-center">
+                        <p><a href="../public/index.php?route=editBlogPost&idBlogPost={{ blog.id }}" class="btn btn-warning btn-sm mb-1">Modifier</a></p>
+                        <a href="../public/index.php?route=deleteBlogPost&idBlogPost={{ blog.id }}" class="btn btn-danger btn-sm">Supprimer</a>
                     </td>
                 </tr>
-        {% endfor %}
-    </table>
-    <a href="../public/index.php">Retour à l'accueil</a>
+                {% endfor %}
+            </table>
+        </div>
+    </section>
+    <section>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2>Utilisateurs</h2>
+                    <hr class="star-primary">
+                </div>
+            </div>
+            <table class="table table-bordered table-striped">
+                <tr>
+                    <td>Id</td>
+                    <td>Pseudo</td>
+                    <td>Rôle</td>
+                    <td>Actions</td>
+                </tr>
+                {% for user in users %}
+                    <tr>
+                        <td>{{ user.id }}</td>
+                        <td>{{ user.pseudo }}</td>
+                        <td>{{ user.role }}</td>
+                        <td>
+                            {% if user.role != 'admin' %}
+                                <a href="../public/index.php?route=deleteUser&userId={{ user.id }}" class="btn btn-danger btn-sm">Supprimer</a>
+                            {% else %}
+                                Suppression impossible
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </section>
+    <section>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2>Commentaires en attente de validation</h2>
+                    <hr class="star-primary">
+                </div>
+            </div>
+            <table class="table table-bordered table-striped">
+                <tr>
+                    <td>Id</td>
+                    <td>Pseudo</td>
+                    <td>Article</td>
+                    <td>Contenu</td>
+                    <td>Actions</td>
+                </tr>
+                {% for comment in comments %}
+                    <tr>
+                        <td>{{ comment.id }}</td>
+                        <td>{{ comment.user.pseudo }}</td>
+                        <td>{{ comment.blogPost.title }}</td>
+                        <td>{{ comment.content }}</td>
+                        <td>
+                            <p><a href="../public/index.php?route=deleteComment&idComment={{ comment.id }}" class="btn btn-danger btn-sm">Supprimer</a></p>
+                            <a href="../public/index.php?route=validateComment&idComment={{ comment.id }}" class="btn btn-success btn-sm">Valider</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </section>
 {% endblock %}
