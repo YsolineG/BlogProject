@@ -59,6 +59,8 @@ class Router
                     $this->frontController->contactForm($this->request->getPost());
                 } elseif ($route === 'validateComment') {
                     $this->backController->validateComment($this->request->getGet()->get('idComment'));
+                } elseif ($route === 'allBlogPosts') {
+                    $this->frontController->allBlogPosts();
                 } else {
                     $this->errorController->errorNotFound();
                 }
