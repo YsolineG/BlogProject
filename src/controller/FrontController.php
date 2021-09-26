@@ -87,8 +87,14 @@ class FrontController extends Controller
 
     public function contactForm(Parameter $post)
     {
-        var_dump($post);
         if($post->get('submit')) {
+            $errors = $this->validation->validate($post, 'ContactForm');
+            if($errors) {
+                return $this->view->renderTwig('home.html.twig', [
+                    'errors' => $errors
+                ]);
+            }
+            $this->session->set('contactForm', 'Le message a bien été envoyé');
             $headers = array(
                 'From' => $post->get('lastname').' '.$post->get('firstname').' <'.$post->get('email').'>',
                 'Reply-To' => $post->get('email'),
@@ -103,7 +109,7 @@ class FrontController extends Controller
             );
         }
 
-        return $this->view->renderTwig('contactForm.html.twig');
+        return $this->view->renderTwig('home.html.twig');
     }
 
     public function allBlogPosts()
