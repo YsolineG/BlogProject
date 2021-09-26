@@ -33,4 +33,14 @@ abstract class Controller
         $this->validation = new Validation();
         $this->userDAO = new UserDAO();
     }
+
+    public function checkLoggedIn()
+    {
+        if(!$this->session->get('pseudo')) {
+            $this->session->set('needLogin', 'Vous devez vous connecter pour accéder à cette page');
+            header('Location:../public/index.php?route=login');
+        } else {
+            return true;
+        }
+    }
 }

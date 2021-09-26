@@ -87,7 +87,7 @@ class BackController extends Controller
         }
     }
 
-    public function logout(): void
+    public function logout()
     {
         if($this->checkLoggedIn()){
             $this->logoutOrDeleteAccount('logout');
@@ -135,16 +135,6 @@ class BackController extends Controller
             $this->userDAO->deleteUser($userId);
             $this->session->set('successMessage', 'L\'utilisateur a bien été supprimé');
             header('Location:../public/index.php?route=administration');
-        }
-    }
-
-    public function checkLoggedIn()
-    {
-        if(!$this->session->get('pseudo')) {
-            $this->session->set('needLogin', 'Vous devez vous connecter pour accéder à cette page');
-            header('Location:../public/index.php?route=login');
-        } else {
-            return true;
         }
     }
 
