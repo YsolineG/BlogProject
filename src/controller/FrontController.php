@@ -24,21 +24,21 @@ class FrontController extends Controller
 
     public function addComment($post, $idBlogPost)
     {
-        if($post->get('submit')) {
+        if($this->checkLoggedIn() && $post->get('submit')) {
             $errors = $this->validation->validate($post, 'Comment');
-            if(!$errors) {
-                $this->commentDAO->addComment($post, $idBlogPost, $this->session->get('id'));
-                $this->session->set('addComment', 'Le commentaire a bien été ajouté et est en attente de validation');
-                header('Location:../public/index.php?route=blogPost&idBlogPost='.$idBlogPost);
+            if($errors) {
+                $blogPost = $this->blogPostDAO->getBlogPost($idBlogPost);
+                $comments = $this->commentDAO->getCommentsForBlogPostId($idBlogPost);
+                return $this->view->renderTwig('GetBlogPost.html.twig', [
+                    'blogPost' => $blogPost,
+                    'comments' => $comments,
+                    'post' => $post,
+                    'errors' => $errors
+                ]);
             }
-            $blogPost = $this->blogPostDAO->getBlogPost($idBlogPost);
-            $comments = $this->commentDAO->getCommentsForBlogPostId($idBlogPost);
-            return $this->view->renderTwig('GetBlogPost.html.twig', [
-                'blogPost' => $blogPost,
-                'comments' => $comments,
-                'post' => $post,
-                'errors' => $errors
-            ]);
+            $this->commentDAO->addComment($post, $idBlogPost, $this->session->get('id'));
+            $this->session->set('addComment', 'Le commentaire a bien été ajouté et est en attente de validation');
+            header('Location:../public/index.php?route=blogPost&idBlogPost=' . $idBlogPost);
         }
     }
 
