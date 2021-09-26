@@ -54,7 +54,13 @@ class FrontController extends Controller
             }
             if(!$errors) {
                 $this->userDAO->register($post);
-                $this->session->set('register', 'Votre inscription a bien été effectuée');
+                // récupérer notre utilisateur nouvellement créé
+                // connecter cet utilisateur
+                $result = $this->userDAO->login($post);
+                $this->session->set('id', $result['result']['user_id']);
+                $this->session->set('role', $result['result']['name']);
+                $this->session->set('pseudo', $post->get('pseudo'));
+
                 header('Location:../public/index.php');
             }
             return $this->view->renderTwig('register.html.twig', [
