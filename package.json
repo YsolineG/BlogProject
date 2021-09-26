@@ -1,0 +1,24 @@
+{
+  "name": "blogproject",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build:css": "lessc ./public/less/freelancer.less ./public/css/freelancer.css"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/YsolineG/BlogProject.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/YsolineG/BlogProject/issues"
+  },
+  "homepage": "https://github.com/YsolineG/BlogProject#readme",
+  "dependencies": {},
+  "devDependencies": {
+    "less": "^4.1.1"
+  }
+}
