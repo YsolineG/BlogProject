@@ -21,7 +21,6 @@
                 <div class="text-center">
                     <h2>{{ session.get('pseudo') }}</h2><br>
                     <p class="text-danger">{{ session.show('notAdmin') }}</p>
-                    <p class="text-danger">{{ session.show('errorMessage') }}</p>
                     <p class="text-success">{{ session.show('successMessage') }}</p>
                     <p><a href="../public/index.php?route=updatePassword" class="btn btn-success">Modifier son mot de passe</a></p>
                     <a href="../public/index.php?route=deleteAccount" class="btn btn-success">Supprimer mon profil</a>
