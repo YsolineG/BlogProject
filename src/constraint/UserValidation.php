@@ -46,7 +46,8 @@ class UserValidation extends Validation
         }
     }
 
-    private function addError($name, $error) {
+    private function addError($name, $error)
+    {
         if($error) {
             $this->errors += [
                 $name => $error
