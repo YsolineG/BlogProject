@@ -9,7 +9,7 @@
                         <div class="row control-group">
                             <div class="form-group col-xs-12 floating-label-form-group controls">
                                 <label for="content">Commentaire</label>
-                                <textarea {{ session.get('pseudo') ? '' : 'disabled' }} rows="5" class="form-control" placeholder="Commentaire" id="content" name="content">{{ post is defined ? post.get('content') : '' }}</textarea>
+                                <textarea {{ session.get('pseudo') ? '' : 'disabled' }} rows="5" class="form-control" id="content" name="content" style="color: white">{{ post is defined ? post.get('content') : '' }}</textarea>
                                 <p class="text-danger">{{ errors['content'] is defined ? errors['content'] : '' }}</p>
                             </div>
                         </div>
