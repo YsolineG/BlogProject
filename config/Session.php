@@ -11,7 +11,7 @@ class Session
         $this->session = $session;
     }
 
-    public function set($name, $value)
+    public function set($name, $value): void
     {
         $_SESSION[$name] = $value;
     }
@@ -33,17 +33,17 @@ class Session
         }
     }
 
-    public function remove($name)
+    public function remove($name): void
     {
         unset($_SESSION[$name]);
     }
 
-    public function stop()
+    public function stop(): void
     {
         session_destroy();
     }
 
-    public function start()
+    public function start(): void
     {
         session_start();
     }

@@ -22,7 +22,7 @@ class Router
         $this->backController = new BackController();
     }
 
-    public function run()
+    public function run(): void
     {
         $route = $this->request->getGet()->get('route');
         try {
@@ -68,7 +68,6 @@ class Router
                 $this->frontController->home();
             }
         } catch (Exception $e) {
-            var_dump($e);
             $this->errorController->errorServer();
         }
     }
