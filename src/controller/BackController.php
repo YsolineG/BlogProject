@@ -112,7 +112,7 @@ class BackController extends Controller
         } else {
             $this->session->set($param, 'Votre compte a bien été supprimé');
         }
-        header('Location:/../public/index.php');
+        header('Location:../public/index.php');
     }
 
     public function administration()
