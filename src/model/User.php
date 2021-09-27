@@ -17,7 +17,7 @@ class User
         return $this->id;
     }
 
-    public function setId($id)
+    public function setId($id): void
     {
         $this->id = $id;
     }
@@ -27,7 +27,7 @@ class User
         return $this->pseudo;
     }
 
-    public function setPseudo($pseudo)
+    public function setPseudo($pseudo): void
     {
         $this->pseudo = $pseudo;
     }
@@ -37,7 +37,7 @@ class User
         return $this->password;
     }
 
-    public function setPassword($password)
+    public function setPassword($password): void
     {
         $this->password = $password;
     }
@@ -47,7 +47,7 @@ class User
         return $this->role;
     }
 
-    public function setRole($role)
+    public function setRole($role): void
     {
         $this->role = $role;
     }
@@ -57,7 +57,7 @@ class User
         return $this->email;
     }
 
-    public function setEmail($email)
+    public function setEmail($email): void
     {
         $this->email = $email;
     }
@@ -67,7 +67,7 @@ class User
         return $this->name;
     }
 
-    public function setName($name)
+    public function setName($name): void
     {
         $this->name = $name;
     }
@@ -77,7 +77,7 @@ class User
         return $this->firstName;
     }
 
-    public function setFirstName($firstName)
+    public function setFirstName($firstName): void
     {
         $this->firstName = $firstName;
     }

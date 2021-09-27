@@ -17,7 +17,7 @@ class BlogPost
         return $this->id;
     }
 
-    public function setId($id)
+    public function setId($id): void
     {
         $this->id = $id;
     }
@@ -28,7 +28,7 @@ class BlogPost
         return $this->title;
     }
 
-    public function setTitle($title)
+    public function setTitle($title): void
     {
         $this->title = $title;
     }
@@ -38,7 +38,7 @@ class BlogPost
         return $this->content;
     }
 
-    public function setContent($content)
+    public function setContent($content): void
     {
         $this->content = $content;
     }
@@ -48,7 +48,7 @@ class BlogPost
         return $this->createdAt;
     }
 
-    public function setCreatedAt($createdAt)
+    public function setCreatedAt($createdAt): void
     {
         $this->createdAt = $createdAt;
     }
@@ -58,12 +58,12 @@ class BlogPost
         return $this->updatedAt;
     }
 
-    public function setUpdatedAt($updatedAt)
+    public function setUpdatedAt($updatedAt): void
     {
         $this->updatedAt = $updatedAt;
     }
 
-    public function setUser(User $user)
+    public function setUser(User $user): void
     {
         $this->user = $user;
     }
@@ -78,7 +78,7 @@ class BlogPost
         return $this->chapeau;
     }
 
-    public function setChapeau($chapeau)
+    public function setChapeau($chapeau): void
     {
         $this->chapeau = $chapeau;
     }

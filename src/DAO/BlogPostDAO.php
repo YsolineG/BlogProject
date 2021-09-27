@@ -8,7 +8,7 @@ use BlogProject\src\model\User;
 class BlogPostDAO extends Database
 {
 
-    private function buildObject($row)
+    private function buildObject($row): BlogPost
     {
         $blogPost = new BlogPost();
         $blogPost->setId($row['blog_post_id']);
@@ -25,7 +25,7 @@ class BlogPostDAO extends Database
         return $blogPost;
     }
 
-    public function getBlogPosts()
+    public function getBlogPosts(): array
     {
         $sql = 'SELECT blog_post.blog_post_id, blog_post.title, blog_post.chapeau, blog_post.content, blog_post.created_at, blog_post.updated_at, url_picture, user.pseudo AS user_pseudo
                 FROM blog_post
@@ -41,7 +41,7 @@ class BlogPostDAO extends Database
         return $blogPosts;
     }
 
-    public function getBlogPost($idBlogPost)
+    public function getBlogPost($idBlogPost): BlogPost
     {
         $sql = 'SELECT blog_post.blog_post_id, blog_post.title, blog_post.chapeau, blog_post.content, blog_post.created_at, blog_post.updated_at, url_picture, user.pseudo AS user_pseudo
                 FROM blog_post
@@ -54,7 +54,7 @@ class BlogPostDAO extends Database
         return $this->buildObject($blogPost);
     }
 
-    public function addBlogPost($post, $userId)
+    public function addBlogPost($post, $userId): void
     {
         $sql = 'INSERT INTO blog_post(title, chapeau, content, created_at, id_user) VALUES (?,?,?,NOW(),?)';
         $this->createQuery($sql, [
@@ -65,7 +65,7 @@ class BlogPostDAO extends Database
         ]);
     }
 
-    public function editBlogPost($post, $idBlogPost)
+    public function editBlogPost($post, $idBlogPost): void
     {
         $sql = 'UPDATE blog_post SET title = :title, chapeau = :chapeau, content = :content, updated_at = NOW() WHERE blog_post_id=:idBlogPost';
         $this->createQuery($sql, [
@@ -76,7 +76,7 @@ class BlogPostDAO extends Database
         ]);
     }
 
-    public function deleteBlogPost($idBlogPost)
+    public function deleteBlogPost($idBlogPost): void
     {
         $sql = 'DELETE FROM comment WHERE id_blog_post = ?';
         $this->createQuery($sql, [$idBlogPost]);

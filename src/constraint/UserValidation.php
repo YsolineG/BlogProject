@@ -14,7 +14,7 @@ class UserValidation extends Validation
         $this->constraint = new Constraint();
     }
 
-    public function check(Parameter $post)
+    public function check(Parameter $post): array
     {
         foreach ($post->all() as $key => $value) {
             $this->checkField($key, $value);
@@ -22,7 +22,7 @@ class UserValidation extends Validation
         return $this->errors;
     }
 
-    private function checkField($name, $value)
+    private function checkField($name, $value): void
     {
         if($name === 'pseudo') {
             $error = $this->checkPseudo($name, $value);
@@ -46,7 +46,7 @@ class UserValidation extends Validation
         }
     }
 
-    private function addError($name, $error)
+    private function addError($name, $error): void
     {
         if($error) {
             $this->errors += [
@@ -55,7 +55,7 @@ class UserValidation extends Validation
         }
     }
 
-    private function checkPseudo($name, $value)
+    private function checkPseudo($name, $value): string
     {
         if($this->constraint->notBlank($name, $value)) {
             return $this->constraint->notBlank('pseudo', $value);
@@ -66,9 +66,11 @@ class UserValidation extends Validation
         if($this->constraint->maxLength($name, $value, 255)) {
             return $this->constraint->maxLength('pseudo', $value, 255);
         }
+
+        return '';
     }
 
-    private function checkPassword($name, $value)
+    private function checkPassword($name, $value): string
     {
         if($this->constraint->notBlank($name, $value)) {
             return $this->constraint->notBlank('password', $value);
@@ -79,9 +81,11 @@ class UserValidation extends Validation
         if($this->constraint->maxLength($name, $value, 255)) {
             return $this->constraint->maxLength('password', $value, 255);
         }
+
+        return '';
     }
 
-    private function checkEmail($name, $value)
+    private function checkEmail($name, $value): string
     {
         if($this->constraint->notBlank($name, $value)) {
             return $this->constraint->notBlank('email', $value);
@@ -92,9 +96,11 @@ class UserValidation extends Validation
         if($this->constraint->maxLength($name, $value, 255)) {
             return $this->constraint->maxLength('email', $value, 255);
         }
+
+        return '';
     }
 
-    private function checkName($name, $value)
+    private function checkName($name, $value): string
     {
         if($this->constraint->notBlank($name, $value)) {
             return $this->constraint->notBlank('name', $value);
@@ -105,9 +111,11 @@ class UserValidation extends Validation
         if($this->constraint->maxLength($name, $value, 255)) {
             return $this->constraint->maxLength('name', $value, 255);
         }
+
+        return '';
     }
 
-    private function checkFirstName($name, $value)
+    private function checkFirstName($name, $value): string
     {
         if($this->constraint->notBlank($name, $value)) {
             return $this->constraint->notBlank('firstname', $value);
@@ -118,5 +126,7 @@ class UserValidation extends Validation
         if($this->constraint->maxLength($name, $value, 255)) {
             return $this->constraint->maxLength('firstname', $value, 255);
         }
+
+        return '';
     }
 }

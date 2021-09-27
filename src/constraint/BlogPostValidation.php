@@ -14,7 +14,7 @@ class BlogPostValidation extends Validation
         $this->constraint = new Constraint();
     }
 
-    public function check(Parameter $post)
+    public function check(Parameter $post): array
     {
         foreach ($post->all() as $key => $value) {
             $this->checkField($key, $value);
@@ -22,7 +22,7 @@ class BlogPostValidation extends Validation
         return $this->errors;
     }
 
-    private function checkField($name, $value)
+    private function checkField($name, $value): void
     {
         if($name === 'title') {
             $error = $this->checkTitle($name, $value);
@@ -38,7 +38,7 @@ class BlogPostValidation extends Validation
         }
     }
 
-    private function addError($name, $error)
+    private function addError($name, $error): void
     {
         if($error) {
             $this->errors += [
@@ -47,7 +47,7 @@ class BlogPostValidation extends Validation
         }
     }
 
-    private function checkTitle($name, $value)
+    private function checkTitle($name, $value): string
     {
         if($this->constraint->notBlank($name, $value)) {
             return $this->constraint->notBlank('titre', $value);
@@ -58,9 +58,11 @@ class BlogPostValidation extends Validation
         if($this->constraint->maxLength($name, $value, 255)) {
             return $this->constraint->maxLength('titre', $value, 255);
         }
+
+        return '';
     }
 
-    private function checkContent($name, $value)
+    private function checkContent($name, $value): string
     {
         if($this->constraint->notBlank($name, $value)) {
             return $this->constraint->notBlank('contenu', $value);
@@ -68,9 +70,11 @@ class BlogPostValidation extends Validation
         if($this->constraint->minLength($name, $value, 2)) {
             return $this->constraint->minLength('contenu', $value, 2);
         }
+
+        return '';
     }
 
-    private function checkChapeau($name, $value)
+    private function checkChapeau($name, $value): string
     {
         if($this->constraint->notBlank($name, $value)) {
             return $this->constraint->notBlank('chapeau', $value);
@@ -81,5 +85,7 @@ class BlogPostValidation extends Validation
         if($this->constraint->maxLength($name, $value, 255)) {
             return $this->constraint->maxLength('chapeau', $value, 255);
         }
+
+        return '';
     }
 }

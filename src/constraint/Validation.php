@@ -4,7 +4,7 @@ namespace BlogProject\src\constraint;
 
 class Validation
 {
-    public function validate($data, $name)
+    public function validate($data, $name): array
     {
         if($name === 'BlogPost') {
             $blogPostValidation = new BlogPostValidation();

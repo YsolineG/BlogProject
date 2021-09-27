@@ -8,7 +8,7 @@ use BlogProject\src\model\User;
 class CommentDAO extends Database
 {
 
-    public function buildObject($row)
+    public function buildObject($row): Comment
     {
         $comment = new Comment();
         $comment->setId($row['comment_id']);
@@ -24,7 +24,7 @@ class CommentDAO extends Database
         return $comment;
     }
 
-    public function getCommentsForBlogPostId($idBlogPost)
+    public function getCommentsForBlogPostId($idBlogPost): array
     {
         $sql = 'SELECT comment.comment_id, comment.content, comment.created_at, comment.updated_at, comment.comment_state, comment.comment_state, user.pseudo AS user_pseudo
                 FROM comment
@@ -41,7 +41,7 @@ class CommentDAO extends Database
         return $comments;
     }
 
-    public function getInvalidComments()
+    public function getInvalidComments(): array
     {
         $sql = 'SELECT comment.comment_id, comment.content, comment.created_at, comment.updated_at, comment.comment_state, comment.comment_state, user.pseudo AS user_pseudo
                 FROM comment
@@ -57,19 +57,19 @@ class CommentDAO extends Database
         return $comments;
     }
 
-    public function addComment($post, $idBlogPost, $idUser)
+    public function addComment($post, $idBlogPost, $idUser): void
     {
         $sql = 'INSERT INTO comment (content, created_at, id_blog_post, id_user, comment_state) VALUES (?, NOW(), ?, ?, "invalid")';
         $this->createQuery($sql, [$post->get('content'), $idBlogPost, $idUser]);
     }
 
-    public function deleteComment($idComment)
+    public function deleteComment($idComment): void
     {
         $sql = 'DELETE FROM comment WHERE comment_id = ?';
         $this->createQuery($sql, [$idComment]);
     }
 
-    public function validateComment($idComment)
+    public function validateComment($idComment): void
     {
         $sql = 'UPDATE comment SET comment_state = "valid" WHERE comment_id = :idComment';
         $this->createQuery($sql, ['idComment' => $idComment]);

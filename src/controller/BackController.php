@@ -4,7 +4,7 @@ namespace BlogProject\src\controller;
 
 class BackController extends Controller
 {
-    public function addBlogPost($post)
+    public function addBlogPost($post): void
     {
         if($this->checkAdmin()){
             if($post->get('submit')) {
@@ -14,16 +14,16 @@ class BackController extends Controller
                     $this->session->set('successMessage', 'Le nouvel article a bien été ajouté');
                     header('Location:../public/index.php?route=administration');
                 }
-                return $this->view->renderTwig('AddBlogPost.html.twig', [
+                $this->view->renderTwig('AddBlogPost.html.twig', [
                     'post' => $post,
                     'errors' => $errors
                 ]);
             }
-            return $this->view->renderTwig('AddBlogPost.html.twig');
+            $this->view->renderTwig('AddBlogPost.html.twig');
         }
     }
 
-    public function editBlogPost($post, $idBlogPost)
+    public function editBlogPost($post, $idBlogPost): void
     {
         if($this->checkAdmin()){
             $blogPost = $this->blogPostDAO->getBlogPost($idBlogPost);
@@ -34,7 +34,7 @@ class BackController extends Controller
                     $this->session->set('successMessage', 'l\'article a bien été modifié');
                     header('Location:../public/index.php?route=administration');
                 }
-                return $this->view->renderTwig('EditBlogPost.html.twig', [
+                $this->view->renderTwig('EditBlogPost.html.twig', [
                     'post' => $post,
                     'errors' => $errors
                 ]);
@@ -44,13 +44,13 @@ class BackController extends Controller
             $post->set('chapeau', $blogPost->getChapeau());
             $post->set('content', $blogPost->getContent());
 
-            return $this->view->renderTwig('EditBlogPost.html.twig', [
+            $this->view->renderTwig('EditBlogPost.html.twig', [
                 'post' => $post
             ]);
         }
     }
 
-    public function deleteBlogPost($idBlogPost)
+    public function deleteBlogPost($idBlogPost): void
     {
         if($this->checkAdmin()){
             $this->blogPostDAO->deleteBlogPost($idBlogPost);
@@ -59,7 +59,7 @@ class BackController extends Controller
         }
     }
 
-    public function deleteComment($idComment)
+    public function deleteComment($idComment): void
     {
         if($this->checkAdmin()){
             $this->commentDAO->deleteComment($idComment);
@@ -68,14 +68,14 @@ class BackController extends Controller
         }
     }
 
-    public function profile()
+    public function profile(): void
     {
         if($this->checkLoggedIn()) {
-            return $this->view->renderTwig('profile.html.twig');
+            $this->view->renderTwig('profile.html.twig');
         }
     }
 
-    public function updatePassword($post)
+    public function updatePassword($post): void
     {
         if($this->checkLoggedIn()) {
             if($post->get('submit')) {
@@ -83,11 +83,11 @@ class BackController extends Controller
                 $this->session->set('successMessage', 'Le mot de passe a été mis à jour');
                 header('Location:../public/index.php?route=profile');
             }
-            return $this->view->renderTwig('updatePassword.html.twig');
+            $this->view->renderTwig('updatePassword.html.twig');
         }
     }
 
-    public function logout()
+    public function logout(): void
     {
         if($this->checkLoggedIn()){
             $this->logoutOrDeleteAccount('logout');
@@ -115,13 +115,13 @@ class BackController extends Controller
         header('Location:../public/index.php');
     }
 
-    public function administration()
+    public function administration(): void
     {
         if($this->checkAdmin()) {
             $blogPosts = $this->blogPostDAO->getBlogPosts();
             $users = $this->userDAO->getUsers();
             $comments = $this->commentDAO->getInvalidComments();
-            return $this->view->renderTwig('administration.html.twig', [
+            $this->view->renderTwig('administration.html.twig', [
                 'blogPosts' => $blogPosts,
                 'users' => $users,
                 'comments' => $comments
@@ -129,7 +129,7 @@ class BackController extends Controller
         }
     }
 
-    public function deleteUser($userId)
+    public function deleteUser($userId): void
     {
         if($this->checkAdmin()) {
             $this->userDAO->deleteUser($userId);
@@ -138,7 +138,7 @@ class BackController extends Controller
         }
     }
 
-    public function checkAdmin()
+    public function checkAdmin(): bool
     {
         $this->checkLoggedIn();
         if($this->session->get('role') !== 'admin') {
@@ -149,7 +149,7 @@ class BackController extends Controller
         }
     }
 
-    public function validateComment($idComment)
+    public function validateComment($idComment): void
     {
         if($this->checkAdmin()){
             $this->commentDAO->validateComment($idComment);

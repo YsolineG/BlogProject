@@ -4,12 +4,12 @@ namespace BlogProject\src\controller;
 
 class ErrorController extends Controller
 {
-    public function errorNotFound()
+    public function errorNotFound(): void
     {
         echo 'page non trouvée';
     }
 
-    public function errorServer()
+    public function errorServer(): void
     {
         echo 'problème serveur';
     }

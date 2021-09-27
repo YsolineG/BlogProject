@@ -9,7 +9,7 @@ abstract class Database
 {
     private $connection;
 
-    private function checkConnection()
+    private function checkConnection(): PDO
     {
          if($this->connection === null) {
              return $this->getConnection();
@@ -17,7 +17,7 @@ abstract class Database
          return $this->connection;
      }
 
-     private function getConnection()
+     private function getConnection(): PDO
      {
          try {
              $this->connection = new PDO(DB_HOST, DB_USER);
@@ -32,12 +32,10 @@ abstract class Database
      {
          if ($parameters) {
              $result = $this->checkConnection()->prepare($sql);
-//             $result->setFetchMode(PDO::FETCH_CLASS, static::class);
              $result->execute($parameters);
              return $result;
          }
          $result = $this->checkConnection()->query($sql);
-//         $result->setFetchMode(PDO::FETCH_CLASS, static::class);
          return $result;
      }
 }

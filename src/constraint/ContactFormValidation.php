@@ -14,7 +14,7 @@ class ContactFormValidation extends Validation
         $this->constraint = new Constraint();
     }
 
-    public function check(Parameter $post)
+    public function check(Parameter $post): array
     {
         foreach ($post->all() as $key => $value) {
             $this->checkField($key, $value);
@@ -22,7 +22,7 @@ class ContactFormValidation extends Validation
         return $this->errors;
     }
 
-    private function checkField($name, $value)
+    private function checkField($name, $value): void
     {
         if($name === 'name') {
             $error = $this->checkName($name, $value);
@@ -46,7 +46,7 @@ class ContactFormValidation extends Validation
         }
     }
 
-    private function addError($name, $error)
+    private function addError($name, $error): void
     {
         if($error) {
             $this->errors += [
@@ -55,7 +55,7 @@ class ContactFormValidation extends Validation
         }
     }
 
-    private function checkName($name, $value)
+    private function checkName($name, $value): string
     {
         if($this->constraint->notBlank($name, $value)) {
             return $this->constraint->notBlank('name', $value);
@@ -66,9 +66,11 @@ class ContactFormValidation extends Validation
         if($this->constraint->maxLength($name, $value, 255)) {
             return $this->constraint->maxLength('name', $value, 255);
         }
+
+        return '';
     }
 
-    private function checkFirstName($name, $value)
+    private function checkFirstName($name, $value): string
     {
         if($this->constraint->notBlank($name, $value)) {
             return $this->constraint->notBlank('firstname', $value);
@@ -79,9 +81,11 @@ class ContactFormValidation extends Validation
         if($this->constraint->maxLength($name, $value, 255)) {
             return $this->constraint->maxLength('firstname', $value, 255);
         }
+
+        return '';
     }
 
-    private function checkEmail($name, $value)
+    private function checkEmail($name, $value): string
     {
         if($this->constraint->notBlank($name, $value)) {
             return $this->constraint->notBlank('email', $value);
@@ -92,9 +96,11 @@ class ContactFormValidation extends Validation
         if($this->constraint->maxLength($name, $value, 255)) {
             return $this->constraint->maxLength('email', $value, 255);
         }
+
+        return '';
     }
 
-    private function checkObject($name, $value)
+    private function checkObject($name, $value): string
     {
         if($this->constraint->notBlank($name, $value)) {
             return $this->constraint->notBlank('object', $value);
@@ -105,9 +111,11 @@ class ContactFormValidation extends Validation
         if($this->constraint->maxLength($name, $value, 255)) {
             return $this->constraint->maxLength('object', $value, 255);
         }
+
+        return '';
     }
 
-    private function checkMessage($name, $value)
+    private function checkMessage($name, $value): string
     {
         if($this->constraint->notBlank($name, $value)) {
             return $this->constraint->notBlank('message', $value);
@@ -115,5 +123,7 @@ class ContactFormValidation extends Validation
         if($this->constraint->minLength($name, $value, 2)) {
             return $this->constraint->minLength('message', $value, 2);
         }
+
+        return '';
     }
 }

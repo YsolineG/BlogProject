@@ -6,30 +6,30 @@ use BlogProject\config\Parameter;
 
 class FrontController extends Controller
 {
-    public function home()
+    public function home(): void
     {
         $blogPosts = $this->blogPostDAO->getBlogPosts();
         $this->view->renderTwig('home.html.twig', ['blogPosts' => $blogPosts]);
     }
 
-    public function blogPost($idBlogPost)
+    public function blogPost($idBlogPost): void
     {
         $blogPost = $this->blogPostDAO->getBlogPost($idBlogPost);
         $comments = $this->commentDAO->getCommentsForBlogPostId($idBlogPost);
-        return $this->view->renderTwig('GetBlogPost.html.twig', [
+        $this->view->renderTwig('GetBlogPost.html.twig', [
             'blogPost' => $blogPost,
             'comments' => $comments
         ]);
     }
 
-    public function addComment($post, $idBlogPost)
+    public function addComment($post, $idBlogPost): void
     {
         if($this->checkLoggedIn() && $post->get('submit')) {
             $errors = $this->validation->validate($post, 'Comment');
             if($errors) {
                 $blogPost = $this->blogPostDAO->getBlogPost($idBlogPost);
                 $comments = $this->commentDAO->getCommentsForBlogPostId($idBlogPost);
-                return $this->view->renderTwig('GetBlogPost.html.twig', [
+                $this->view->renderTwig('GetBlogPost.html.twig', [
                     'blogPost' => $blogPost,
                     'comments' => $comments,
                     'post' => $post,
@@ -42,7 +42,7 @@ class FrontController extends Controller
         }
     }
 
-    public function register($post)
+    public function register($post): void
     {
         if($post->get('submit')) {
             $errors = $this->validation->validate($post, 'User');
@@ -63,15 +63,15 @@ class FrontController extends Controller
 
                 header('Location:../public/index.php');
             }
-            return $this->view->renderTwig('register.html.twig', [
+            $this->view->renderTwig('register.html.twig', [
                 'post' => $post,
                 'errors' => $errors
             ]);
         }
-        return $this->view->renderTwig('register.html.twig');
+        $this->view->renderTwig('register.html.twig');
     }
 
-    public function login($post)
+    public function login($post): void
     {
         if($post->get('submit')) {
             $result = $this->userDAO->login($post);
@@ -83,20 +83,20 @@ class FrontController extends Controller
                 header('Location:../public/index.php');
             } else {
                 $this->session->set('error_login', 'Le pseudo ou le mot de passe est incorrect');
-                return $this->view->renderTwig('login.html.twig', [
+                $this->view->renderTwig('login.html.twig', [
                     'post' => $post
                 ]);
             }
         }
-        return $this->view->renderTwig('login.html.twig');
+        $this->view->renderTwig('login.html.twig');
     }
 
-    public function contactForm(Parameter $post)
+    public function contactForm(Parameter $post): void
     {
         if($post->get('submit')) {
             $errors = $this->validation->validate($post, 'ContactForm');
             if($errors) {
-                return $this->view->renderTwig('home.html.twig', [
+                $this->view->renderTwig('home.html.twig', [
                     'errors' => $errors
                 ]);
             }
@@ -115,10 +115,10 @@ class FrontController extends Controller
             );
         }
 
-        return $this->view->renderTwig('home.html.twig');
+        $this->view->renderTwig('home.html.twig');
     }
 
-    public function allBlogPosts()
+    public function allBlogPosts(): void
     {
         $blogPosts = $this->blogPostDAO->getBlogPosts();
         $this->view->renderTwig('allBlogPosts.html.twig', ['blogPosts' => $blogPosts]);

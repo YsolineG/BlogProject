@@ -16,7 +16,7 @@ class Comment
         return $this->id;
     }
 
-    public function setId($id)
+    public function setId($id): void
     {
         $this->id = $id;
     }
@@ -26,7 +26,7 @@ class Comment
         return $this->content;
     }
 
-    public function setContent($content)
+    public function setContent($content): void
     {
         $this->content = $content;
     }
@@ -36,7 +36,7 @@ class Comment
         return $this->createdAt;
     }
 
-    public function setCreatedAt($createdAt)
+    public function setCreatedAt($createdAt): void
     {
         $this->createdAt = $createdAt;
     }
@@ -46,12 +46,12 @@ class Comment
         return $this->updatedAt;
     }
 
-    public function setUpdatedAt($updatedAt)
+    public function setUpdatedAt($updatedAt): void
     {
         $this->updatedAt = $updatedAt;
     }
 
-    public function setUser(User $user)
+    public function setUser(User $user): void
     {
         $this->user = $user;
     }
@@ -66,7 +66,7 @@ class Comment
         return $this->commentState;
     }
 
-    public function setCommentState($commentState)
+    public function setCommentState($commentState): void
     {
         $this->commentState = $commentState;
     }

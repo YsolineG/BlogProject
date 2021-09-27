@@ -7,7 +7,7 @@ use BlogProject\src\model\User;
 
 class UserDAO extends Database
 {
-    public function buildObject($row)
+    public function buildObject($row): User
     {
         $user = new User();
         $user->setId($row['user_id']);
@@ -19,7 +19,7 @@ class UserDAO extends Database
         return $user;
     }
 
-    public function getUsers()
+    public function getUsers(): array
     {
         $sql = 'SELECT user.user_id, user.pseudo, user.email, user.firstname, role.name FROM user INNER JOIN role ON user.id_role = role.role_id ORDER BY user.user_id DESC';
         $result = $this->createQuery($sql);
@@ -31,7 +31,7 @@ class UserDAO extends Database
         return $users;
     }
 
-    public function register(Parameter $post)
+    public function register(Parameter $post): void
     {
         $sql = 'INSERT INTO user (pseudo, password, firstname, name, email, id_role) 
                 VALUES (?, ?, ?, ?, ?, ?)';
@@ -48,7 +48,7 @@ class UserDAO extends Database
         );
     }
 
-    public function login($post)
+    public function login($post): array
     {
         $sql = 'SELECT user.user_id, user.id_role, user.password, role.name FROM user INNER JOIN role ON role.role_id = user.id_role WHERE pseudo = ?';
         $data = $this->createQuery($sql, [$post->get('pseudo')]);
@@ -60,25 +60,25 @@ class UserDAO extends Database
         ];
     }
 
-    public function updatePassword($post, $pseudo)
+    public function updatePassword($post, $pseudo): void
     {
         $sql = 'UPDATE user SET password = ? WHERE pseudo = ?';
         $this->createQuery($sql, [password_hash($post->get('password'), PASSWORD_BCRYPT), $pseudo]);
     }
 
-    public function deleteAccount($pseudo)
+    public function deleteAccount($pseudo): void
     {
         $sql = 'DELETE FROM user WHERE pseudo = ?';
         $this->createQuery($sql, [$pseudo]);
     }
 
-    public function deleteUser($userId)
+    public function deleteUser($userId): void
     {
         $sql = 'DELETE FROM user WHERE user_id = ?';
         $this->createQuery($sql, [$userId]);
     }
 
-    public function checkUserPseudo($post)
+    public function checkUserPseudo($post): string
     {
         $sql = 'SELECT COUNT(pseudo) FROM user WHERE pseudo = ?';
         $result = $this->createQuery($sql, [$post->get('pseudo')]);
@@ -86,9 +86,11 @@ class UserDAO extends Database
         if($isUnique){
             return 'Le pseudo existe déjà';
         }
+
+        return '';
     }
 
-    public function checkUserEmail($post)
+    public function checkUserEmail($post): string
     {
         $sql = 'SELECT COUNT(email) FROM user WHERE email = ?';
         $result = $this->createQuery($sql, [$post->get('email')]);
@@ -96,5 +98,7 @@ class UserDAO extends Database
         if($isUnique){
             return 'L\'email existe déjà';
         }
+
+        return '';
     }
 }

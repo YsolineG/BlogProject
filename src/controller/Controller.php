@@ -34,7 +34,7 @@ abstract class Controller
         $this->userDAO = new UserDAO();
     }
 
-    public function checkLoggedIn()
+    public function checkLoggedIn(): bool
     {
         if(!$this->session->get('pseudo')) {
             $this->session->set('needLogin', 'Vous devez vous connecter pour accéder à cette page');
@@ -42,5 +42,7 @@ abstract class Controller
         } else {
             return true;
         }
+
+        return '';
     }
 }
