@@ -26,22 +26,20 @@
                 </div>
             </div>
             <table class="table table-bordered table-striped">
-                <tr>
+                <tr class="text-center">
                     <td>Id</td>
                     <td>Titre</td>
                     <td>Auteur</td>
-                    <td>Chapeau</td>
                     <td>Date</td>
                     <td class="text-center">Actions</td>
                 </tr>
                 {% for blog in blogPosts %}
-                <tr>
+                <tr class="text-center">
                     <td>{{ blog.id }}</td>
                     <td><a href="../public/index.php?route=blogPost&idBlogPost={{ blog.id }}">{{ blog.title }}</a></td>
                     <td>{{ blog.user.pseudo }}</td>
-                    <td>{{ blog.chapeau }}</td>
                     <td>Créé le : {{ blog.createdAt }}</td>
-                    <td class="text-center">
+                    <td>
                         <p><a href="../public/index.php?route=editBlogPost&idBlogPost={{ blog.id }}" class="btn btn-warning btn-sm mb-1">Modifier</a></p>
                         <a href="../public/index.php?route=deleteBlogPost&idBlogPost={{ blog.id }}" class="btn btn-danger btn-sm">Supprimer</a>
                     </td>
@@ -59,14 +57,14 @@
                 </div>
             </div>
             <table class="table table-bordered table-striped">
-                <tr>
+                <tr class="text-center">
                     <td>Id</td>
                     <td>Pseudo</td>
                     <td>Rôle</td>
                     <td>Actions</td>
                 </tr>
                 {% for user in users %}
-                    <tr>
+                    <tr class="text-center">
                         <td>{{ user.id }}</td>
                         <td>{{ user.pseudo }}</td>
                         <td>{{ user.role }}</td>
@@ -91,7 +89,7 @@
                 </div>
             </div>
             <table class="table table-bordered table-striped">
-                <tr>
+                <tr class="text-center">
                     <td>Id</td>
                     <td>Pseudo</td>
                     <td>Article</td>
@@ -99,7 +97,7 @@
                     <td>Actions</td>
                 </tr>
                 {% for comment in comments %}
-                    <tr>
+                    <tr class="text-center">
                         <td>{{ comment.id }}</td>
                         <td>{{ comment.user.pseudo }}</td>
                         <td>{{ comment.blogPost.title }}</td>
