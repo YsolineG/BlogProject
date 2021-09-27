@@ -10,22 +10,22 @@ class Request
 
     public function __construct()
     {
-        $this->get = new Parameter($_GET);
+        $this->get = new Parameter(filter_input_array(INPUT_GET, $_GET));
         $this->post = new Parameter($_POST);
         $this->session = new Session($_SESSION);
     }
 
-    public function getGet()
+    public function getGet(): Parameter
     {
         return $this->get;
     }
 
-    public function getPost()
+    public function getPost(): Parameter
     {
         return $this->post;
     }
 
-    public function getSession()
+    public function getSession(): Session
     {
         return $this->session;
     }
