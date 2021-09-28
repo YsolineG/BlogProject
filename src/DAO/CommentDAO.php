@@ -4,6 +4,7 @@ namespace BlogProject\src\DAO;
 
 use BlogProject\src\model\Comment;
 use BlogProject\src\model\User;
+use BlogProject\src\model\BlogPost;
 
 class CommentDAO extends Database
 {
@@ -20,6 +21,17 @@ class CommentDAO extends Database
         $user = new User();
         $user->setPseudo($row['user_pseudo']);
         $comment->setUser($user);
+
+        return $comment;
+    }
+
+    public function buildObjectForAdmin($row): Comment
+    {
+        $comment = $this->buildObject($row);
+
+        $blogPost = new BlogPost();
+        $blogPost->setTitle($row['blog_post_title']);
+        $comment->setBlogPost($blogPost);
 
         return $comment;
     }
@@ -43,16 +55,18 @@ class CommentDAO extends Database
 
     public function getInvalidComments(): array
     {
-        $sql = 'SELECT comment.comment_id, comment.content, comment.created_at, comment.updated_at, comment.comment_state, comment.comment_state, user.pseudo AS user_pseudo
+        $sql = 'SELECT comment.comment_id, comment.content, comment.created_at, comment.updated_at, comment.comment_state, comment.comment_state, user.pseudo AS user_pseudo, blog_post.title AS blog_post_title
                 FROM comment
                 INNER JOIN user
                 ON comment.id_user = user.user_id
+                INNER JOIN blog_post
+                ON comment.id_blog_post = blog_post.blog_post_id
                 WHERE comment_state = "invalid"';
         $result = $this->createQuery($sql);
         $comments = [];
         foreach ($result as $row) {
             $commentId = $row['comment_id'];
-            $comments[$commentId] = $this->buildObject($row);
+            $comments[$commentId] = $this->buildObjectForAdmin($row);
         }
         return $comments;
     }

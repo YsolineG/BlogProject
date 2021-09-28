@@ -10,6 +10,7 @@ class Comment
     private $updatedAt;
     private $user;
     private $commentState;
+    private $blogPost;
 
     public function getId()
     {
@@ -69,5 +70,15 @@ class Comment
     public function setCommentState($commentState): void
     {
         $this->commentState = $commentState;
+    }
+
+    public function getBlogPost()
+    {
+        return $this->blogPost;
+    }
+
+    public function setBlogPost(BlogPost $blogPost): void
+    {
+        $this->blogPost = $blogPost;
     }
 }
