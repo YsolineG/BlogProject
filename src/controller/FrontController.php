@@ -24,9 +24,9 @@ class FrontController extends Controller
 
     public function addComment($post, $idBlogPost): void
     {
-        if($this->checkLoggedIn() && $post->get('submit')) {
+        if ($this->checkLoggedIn() && $post->get('submit')) {
             $errors = $this->validation->validate($post, 'Comment');
-            if($errors) {
+            if ($errors) {
                 $blogPost = $this->blogPostDAO->getBlogPost($idBlogPost);
                 $comments = $this->commentDAO->getCommentsForBlogPostId($idBlogPost);
                 $this->view->renderTwig('GetBlogPost.html.twig', [
@@ -44,15 +44,15 @@ class FrontController extends Controller
 
     public function register($post): void
     {
-        if($post->get('submit')) {
+        if ($post->get('submit')) {
             $errors = $this->validation->validate($post, 'User');
-            if($this->userDAO->checkUserPseudo($post)){
+            if ($this->userDAO->checkUserPseudo($post)) {
                 $errors['pseudo'] = $this->userDAO->checkUserPseudo($post);
             }
-            if($this->userDAO->checkUserEmail($post)){
+            if ($this->userDAO->checkUserEmail($post)) {
                 $errors['email'] = $this->userDAO->checkUserEmail($post);
             }
-            if(!$errors) {
+            if (!$errors) {
                 $this->userDAO->register($post);
                 // récupérer notre utilisateur nouvellement créé
                 // connecter cet utilisateur
@@ -73,9 +73,9 @@ class FrontController extends Controller
 
     public function login($post): void
     {
-        if($post->get('submit')) {
+        if ($post->get('submit')) {
             $result = $this->userDAO->login($post);
-            if($result && $result['isPasswordValid']) {
+            if ($result && $result['isPasswordValid']) {
                 $this->session->set('login', 'Content de vous revoir');
                 $this->session->set('id', $result['result']['user_id']);
                 $this->session->set('role', $result['result']['name']);
@@ -93,24 +93,38 @@ class FrontController extends Controller
 
     public function contactForm(Parameter $post): void
     {
-        if($post->get('submit')) {
+        if ($post->get('submit')) {
             $errors = $this->validation->validate($post, 'ContactForm');
-            if($errors) {
+            if ($errors) {
                 $this->view->renderTwig('home.html.twig', [
                     'errors' => $errors
                 ]);
             }
             $this->session->set('contactForm', 'Le message a bien été envoyé');
             $headers = array(
-                'From' => $post->get('lastname').' '.$post->get('firstname').' <'.$post->get('email').'>',
+//                'From' => $post->get('name').' '.$post->get('firstname').' <'.$post->get('email').'>',
                 'Reply-To' => $post->get('email'),
-                'X-Mailer' => 'PHP/' . PHP_VERSION
+                'X-Mailer' => 'PHP/' . PHP_VERSION,
+                'MIME-Version' => '1.0',
+                'Content-type' => 'text/html',
+                'charset' => 'iso-8859-1'
             );
+
+            $message = <<<HTML
+            <html lang="fr">
+                <body>
+                    <p>Nom et prénom : {$post->get('name')} {$post->get('firstname')}</p>
+                    <p>Email : {$post->get('email')}</p>
+                    <p>Message : {$post->get('message')}</p>
+                </body>
+            </html>
+HTML;
+
 
             mail(
                 'ysoline.ganster@gmail.com',
                 $post->get('object'),
-                $post->get('message'),
+                $message,
                 $headers
             );
         }
