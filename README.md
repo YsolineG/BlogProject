@@ -1,15 +1,17 @@
 # BlogProject
-___
+
 BlogProject is a PHP project for my Openclassrooms training.
-### Technologies
-___
+
+## Technologies
+
 - PHP
 - JavaScript
 - [Twig](https://twig.symfony.com/) - Moteur de templates
 - CSS
 - [Less](https://lesscss.org/) - Langage dynamique de génération de CSS
-### Installation
-___
+
+## Installation
+
 1. Clone the repo
 
 `git clone https://github.com/YsolineG/BlogProject.git`
@@ -18,8 +20,8 @@ ___
 
 `composer install`
 
-### Edit CSS
-___
+## Edit CSS
+
 Install npm packages
 
 `npm install`
