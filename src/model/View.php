@@ -27,6 +27,6 @@ class View
             'debug' => true,
         ]);
         $twig->addExtension(new \Twig\Extension\DebugExtension());
-        echo $twig->render($template, $data);
+        exit($twig->render($template, $data));
     }
 }
