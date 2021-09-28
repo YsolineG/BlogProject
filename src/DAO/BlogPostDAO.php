@@ -27,7 +27,7 @@ class BlogPostDAO extends Database
 
     public function getBlogPosts(): array
     {
-        $sql = 'SELECT blog_post.blog_post_id, blog_post.title, blog_post.chapeau, blog_post.content, blog_post.created_at, blog_post.updated_at, url_picture, user.pseudo AS user_pseudo
+        $sql = 'SELECT blog_post.blog_post_id, blog_post.title, blog_post.chapeau, blog_post.content, blog_post.created_at, blog_post.updated_at, user.pseudo AS user_pseudo
                 FROM blog_post
                 INNER JOIN user
                 ON blog_post.id_user = user.user_id';
@@ -43,7 +43,7 @@ class BlogPostDAO extends Database
 
     public function getBlogPost($idBlogPost): BlogPost
     {
-        $sql = 'SELECT blog_post.blog_post_id, blog_post.title, blog_post.chapeau, blog_post.content, blog_post.created_at, blog_post.updated_at, url_picture, user.pseudo AS user_pseudo
+        $sql = 'SELECT blog_post.blog_post_id, blog_post.title, blog_post.chapeau, blog_post.content, blog_post.created_at, blog_post.updated_at, user.pseudo AS user_pseudo
                 FROM blog_post
                 INNER JOIN user
                 ON blog_post.id_user = user.user_id
