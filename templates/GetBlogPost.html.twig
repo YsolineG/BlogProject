@@ -36,7 +36,7 @@
                     {% if session.get('pseudo') == null %}
                     <p>Vous devez être connecté pour ajouter un commentaire</p>
                     {% endif %}
-                    <p class="text-success text-center">{{ session.show('addComment') }}</p>
+                    <p class="theme-primary text-center">{{ session.show('addComment') }}</p>
                     {% include('formComment.html.twig') %}
                 </div>
             </div>

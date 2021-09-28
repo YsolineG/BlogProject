@@ -35,8 +35,8 @@ hr.star-primary {
   max-width: 250px;
   margin: 25px auto 30px;
 }
-hr.star-light:after,
-hr.star-primary:after {
+hr.star-light::after,
+hr.star-primary::after {
   content: "\f005";
   font-family: FontAwesome;
   display: inline-block;
@@ -48,14 +48,14 @@ hr.star-primary:after {
 hr.star-light {
   border-color: white;
 }
-hr.star-light:after {
+hr.star-light::after {
   background-color: #FAB95B;
   color: white;
 }
 hr.star-primary {
   border-color: #222831;
 }
-hr.star-primary:after {
+hr.star-primary::after {
   background-color: white;
   color: #222831;
 }
@@ -337,6 +337,9 @@ footer .footer-below {
   background-color: #0d0f13;
   border-color: #090b0d;
 }
+.btn-primary:focus {
+  background-color: #0d0f13 !important;
+}
 .btn-primary:active,
 .btn-primary.active,
 .open .dropdown-toggle.btn-primary {
@@ -378,6 +381,9 @@ fieldset[disabled] .btn-primary.active {
   color: white;
   background-color: #f8a42a;
   border-color: #f8a020;
+}
+.btn-success:focus {
+  background-color: #f8a42a !important;
 }
 .btn-success:active,
 .btn-success.active,
