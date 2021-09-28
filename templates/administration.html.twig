@@ -104,7 +104,7 @@
                         <td>{{ comment.content }}</td>
                         <td>
                             <p><a href="../public/index.php?route=deleteComment&idComment={{ comment.id }}" class="btn btn-danger btn-sm">Supprimer</a></p>
-                            <a href="../public/index.php?route=validateComment&idComment={{ comment.id }}" class="btn btn-success btn-sm">Valider</a>
+                            <a href="../public/index.php?route=validateComment&idComment={{ comment.id }}" class="btn btn-validation btn-sm">Valider</a>
                         </td>
                     </tr>
                 {% endfor %}

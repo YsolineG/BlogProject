@@ -13,7 +13,7 @@ a:hover,
 a:focus,
 a:active,
 a.active {
-  color: #FAB95B;
+  color: #FF847C;
   outline: none;
 }
 h1,
@@ -49,7 +49,7 @@ hr.star-light {
   border-color: white;
 }
 hr.star-light::after {
-  background-color: #FAB95B;
+  background-color: #FF847C;
   color: white;
 }
 hr.star-primary {
@@ -64,7 +64,7 @@ hr.star-primary::after {
 }
 header {
   text-align: center;
-  background: #FAB95B;
+  background: #FF847C;
   color: white;
 }
 header .container {
@@ -124,7 +124,7 @@ header .intro-text .skills {
   color: white;
 }
 .navbar-custom .navbar-nav li a:hover {
-  color: #FAB95B;
+  color: #FF847C;
   outline: none;
 }
 .navbar-custom .navbar-nav li a:focus,
@@ -133,13 +133,13 @@ header .intro-text .skills {
 }
 .navbar-custom .navbar-nav li.active a {
   color: white;
-  background: #FAB95B;
+  background: #FF847C;
 }
 .navbar-custom .navbar-nav li.active a:hover,
 .navbar-custom .navbar-nav li.active a:focus,
 .navbar-custom .navbar-nav li.active a:active {
   color: white;
-  background: #FAB95B;
+  background: #FF847C;
 }
 .navbar-custom .navbar-toggle {
   color: white;
@@ -149,9 +149,9 @@ header .intro-text .skills {
 }
 .navbar-custom .navbar-toggle:hover,
 .navbar-custom .navbar-toggle:focus {
-  background-color: #FAB95B;
+  background-color: #FF847C;
   color: white;
-  border-color: #FAB95B;
+  border-color: #FF847C;
 }
 @media (min-width: 768px) {
   .navbar-custom {
@@ -181,7 +181,7 @@ section h2 {
   font-size: 3em;
 }
 section.success {
-  background: #FAB95B;
+  background: #FF847C;
   color: white;
 }
 @media (max-width: 767px) {
@@ -203,7 +203,7 @@ section.success {
   margin: 0 auto;
 }
 #portfolio .portfolio-item .portfolio-link .caption {
-  background: rgba(250, 185, 91, 0.9);
+  background: rgba(255, 132, 124, 0.9);
   position: absolute;
   width: 100%;
   height: 100%;
@@ -284,7 +284,7 @@ section.success {
   opacity: 1;
 }
 .floating-label-form-group-with-focus label {
-  color: #FAB95B;
+  color: #FF847C;
 }
 form .row:first-child .floating-label-form-group {
   border-top: 1px solid #eeeeee;
@@ -318,7 +318,7 @@ footer .footer-below {
 .btn-outline:focus,
 .btn-outline:active,
 .btn-outline.active {
-  color: #FAB95B;
+  color: #FF847C;
   background: white;
   border: solid 2px white;
 }
@@ -369,8 +369,8 @@ fieldset[disabled] .btn-primary.active {
 }
 .btn-success {
   color: white;
-  background-color: #FAB95B;
-  border-color: #FAB95B;
+  background-color: #FF847C;
+  border-color: #FF847C;
   font-weight: 700;
 }
 .btn-success:hover,
@@ -379,11 +379,11 @@ fieldset[disabled] .btn-primary.active {
 .btn-success.active,
 .open .dropdown-toggle.btn-success {
   color: white;
-  background-color: #f8a42a;
-  border-color: #f8a020;
+  background-color: #ff5449;
+  border-color: #ff4b3f;
 }
 .btn-success:focus {
-  background-color: #f8a42a !important;
+  background-color: #ff5449 !important;
 }
 .btn-success:active,
 .btn-success.active,
@@ -405,11 +405,56 @@ fieldset[disabled] .btn-success:active,
 .btn-success.disabled.active,
 .btn-success[disabled].active,
 fieldset[disabled] .btn-success.active {
-  background-color: #FAB95B;
-  border-color: #FAB95B;
+  background-color: #FF847C;
+  border-color: #FF847C;
 }
 .btn-success .badge {
-  color: #FAB95B;
+  color: #FF847C;
+  background-color: white;
+}
+.btn-validation {
+  color: white;
+  background-color: #198754;
+  border-color: #198754;
+  font-weight: 700;
+}
+.btn-validation:hover,
+.btn-validation:focus,
+.btn-validation:active,
+.btn-validation.active,
+.open .dropdown-toggle.btn-validation {
+  color: white;
+  background-color: #115c39;
+  border-color: #0f5334;
+}
+.btn-validation:focus {
+  background-color: #115c39 !important;
+}
+.btn-validation:active,
+.btn-validation.active,
+.open .dropdown-toggle.btn-validation {
+  background-image: none;
+}
+.btn-validation.disabled,
+.btn-validation[disabled],
+fieldset[disabled] .btn-validation,
+.btn-validation.disabled:hover,
+.btn-validation[disabled]:hover,
+fieldset[disabled] .btn-validation:hover,
+.btn-validation.disabled:focus,
+.btn-validation[disabled]:focus,
+fieldset[disabled] .btn-validation:focus,
+.btn-validation.disabled:active,
+.btn-validation[disabled]:active,
+fieldset[disabled] .btn-validation:active,
+.btn-validation.disabled.active,
+.btn-validation[disabled].active,
+fieldset[disabled] .btn-validation.active {
+  background-color: #198754;
+  border-color: #198754;
+}
+.btn-validation .badge {
+  color: #198754;
   background-color: white;
 }
 .btn-social {
