@@ -20,7 +20,7 @@ abstract class Database
      private function getConnection(): PDO
      {
          try {
-             $this->connection = new PDO(DB_HOST, DB_USER);
+             $this->connection = new PDO(DB_DSN, DB_USER, DB_PASSWORD);
              $this->connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
              return $this->connection;
          } catch (Exception $errorConnection) {
