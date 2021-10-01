@@ -6,9 +6,9 @@ BlogProject is a PHP project for my Openclassrooms training.
 
 - PHP
 - JavaScript
-- [Twig](https://twig.symfony.com/) - Moteur de templates
+- [Twig](https://twig.symftwigony.com/) - Template engine for PHP
 - CSS
-- [Less](https://lesscss.org/) - Langage dynamique de génération de CSS
+- [Less](https://lesscss.org/) - Converts the Less styles to CSS styles
 
 ## Installation
 
