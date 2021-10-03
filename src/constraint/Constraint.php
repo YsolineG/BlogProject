@@ -4,7 +4,7 @@ namespace BlogProject\src\constraint;
 
 class Constraint
 {
-    public function notBlank($name, $value): string
+    public function notBlank($value): string
     {
         if(empty($value)) {
             return 'Le champ de saisi est vide';
@@ -12,7 +12,7 @@ class Constraint
 
         return '';
     }
-    public function minLength($name, $value, $minSize): string
+    public function minLength($value, $minSize): string
     {
         if(strlen($value) < $minSize) {
             return 'Le champ doit contenir au moins '.$minSize.' caractères';
@@ -20,7 +20,7 @@ class Constraint
 
         return '';
     }
-    public function maxLength($name, $value, $maxSize): string
+    public function maxLength($value, $maxSize): string
     {
         if(strlen($value) > $maxSize) {
             return 'Le champ doit contenir au maximum '.$maxSize.' caractères';

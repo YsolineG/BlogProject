@@ -49,14 +49,14 @@ class BlogPostValidation extends Validation
 
     private function checkTitle($name, $value): string
     {
-        if($this->constraint->notBlank($name, $value)) {
-            return $this->constraint->notBlank('titre', $value);
+        if($this->constraint->notBlank($value)) {
+            return $this->constraint->notBlank($value);
         }
-        if($this->constraint->minLength($name, $value, 2)) {
-            return $this->constraint->minLength('titre', $value, 2);
+        if($this->constraint->minLength($value, 2)) {
+            return $this->constraint->minLength($value, 2);
         }
-        if($this->constraint->maxLength($name, $value, 255)) {
-            return $this->constraint->maxLength('titre', $value, 255);
+        if($this->constraint->maxLength($value, 255)) {
+            return $this->constraint->maxLength($value, 255);
         }
 
         return '';
@@ -64,11 +64,11 @@ class BlogPostValidation extends Validation
 
     private function checkContent($name, $value): string
     {
-        if($this->constraint->notBlank($name, $value)) {
-            return $this->constraint->notBlank('contenu', $value);
+        if($this->constraint->notBlank($value)) {
+            return $this->constraint->notBlank($value);
         }
-        if($this->constraint->minLength($name, $value, 2)) {
-            return $this->constraint->minLength('contenu', $value, 2);
+        if($this->constraint->minLength($value, 2)) {
+            return $this->constraint->minLength($value, 2);
         }
 
         return '';
@@ -76,14 +76,14 @@ class BlogPostValidation extends Validation
 
     private function checkChapeau($name, $value): string
     {
-        if($this->constraint->notBlank($name, $value)) {
-            return $this->constraint->notBlank('chapeau', $value);
+        if($this->constraint->notBlank($value)) {
+            return $this->constraint->notBlank($value);
         }
-        if($this->constraint->minLength($name, $value, 2)) {
-            return $this->constraint->minLength('chapeau', $value, 2);
+        if($this->constraint->minLength($value, 2)) {
+            return $this->constraint->minLength($value, 2);
         }
-        if($this->constraint->maxLength($name, $value, 255)) {
-            return $this->constraint->maxLength('chapeau', $value, 255);
+        if($this->constraint->maxLength($value, 255)) {
+            return $this->constraint->maxLength($value, 255);
         }
 
         return '';
