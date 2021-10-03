@@ -4,11 +4,11 @@ BlogProject is a PHP project for my Openclassrooms training.
 
 ## Technologies
 
-- PHP
-- JavaScript
-- [Twig](https://twig.symftwigony.com/) - Template engine for PHP
-- CSS
-- [Less](https://lesscss.org/) - Converts the Less styles to CSS styles
+-  PHP
+-  JavaScript
+-  [Twig](https://twig.symftwigony.com/) - Template engine for PHP
+-  CSS
+-  [Less](https://lesscss.org/) - Converts the Less styles to CSS styles
 
 ## Installation
 
