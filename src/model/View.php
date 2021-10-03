@@ -4,12 +4,11 @@ namespace BlogProject\src\model;
 
 use BlogProject\config\Request;
 use Twig\Environment;
+use Twig\Extension\DebugExtension;
 use Twig\Loader\FilesystemLoader;
 
 class View
 {
-    private $file;
-    private $title;
     private $request;
     private $session;
 
@@ -26,7 +25,7 @@ class View
         $twig = new Environment($loader, [
             'debug' => true,
         ]);
-        $twig->addExtension(new \Twig\Extension\DebugExtension());
+        $twig->addExtension(new DebugExtension());
         exit($twig->render($template, $data));
     }
 }
